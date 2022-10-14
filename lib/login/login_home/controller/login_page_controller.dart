@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_tickets/home/view/home_screen.dart';
 
 
 class LoginPageController extends GetxController{
@@ -13,7 +12,7 @@ class LoginPageController extends GetxController{
     buttonclickValidator(){
        if (formKey.currentState!.validate()) {
      Get.snackbar('Processing data ', 'data is processing');
-     Get.to(()=>HomeScreen());
+  
     }
 
    

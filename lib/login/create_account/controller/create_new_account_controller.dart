@@ -5,4 +5,5 @@ class CreateNewAccountcontroller extends GetxController{
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+ late String id;
 }

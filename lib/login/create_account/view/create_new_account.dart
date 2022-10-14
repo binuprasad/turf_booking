@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -6,8 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/login/create_account/controller/create_new_account_controller.dart';
 import 'package:movie_tickets/login/verification/view/verification_screen.dart';
 import 'package:movie_tickets/login/widgets/text_form_field.dart';
-import 'package:movie_tickets/model/create_account_model/create_account_request.dart';
-import 'package:movie_tickets/service/login_api_service.dart';
+import 'package:movie_tickets/service/login_service.dart';
 
 class CreateNewAccount extends StatelessWidget {
   CreateNewAccount({Key? key}) : super(key: key);
@@ -89,15 +90,20 @@ class CreateNewAccount extends StatelessWidget {
               ),
               child: ElevatedButton(
                 onPressed: () async {
+                  String email =
+                      createNewAccountcontroller.emailController.text.trim();
+                  String password =
+                      createNewAccountcontroller.passwordController.text.trim();
+                  final response = await ApiServices()
+                      .createNewAccountService(email, password);
+                  if (response!.error == true) {
 
-                  final model = CreateAccountRequest(
-                      userMail: createNewAccountcontroller.emailController.text
-                          .trim(),
-                      userPassword: createNewAccountcontroller
-                          .passwordController.text
-                          .trim());
-                  await ApiServices.createAccountService(model);
-                  Get.to(()=>OTPverification());
+                    Get.snackbar('', response.messege.toString());
+                  } else {
+                    createNewAccountcontroller.id = response.id!;
+                    log('Created ID${createNewAccountcontroller.id}');
+                    Get.to(() => OTPverification());
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,

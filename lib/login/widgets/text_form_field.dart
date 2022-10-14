@@ -45,18 +45,20 @@ class TextformField extends GetView<LoginPageController> {
           ),
           fillColor: Colors.black,
           filled: true,
-          labelStyle: const TextStyle(color: Colors.white),
-          labelText: text,
-          border: const OutlineInputBorder(),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+          hintStyle: const TextStyle(color: Colors.white),
+          hintText: text,
+  
+          border:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Colors.white,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
+          // focusedBorder: const OutlineInputBorder(
+          //   borderSide: BorderSide(color: Colors.white),
+          // ),
+          // enabledBorder: OutlineInputBorder(
+          //   borderSide: const BorderSide(
+          //     color: Colors.lightBlue,
+          //   ),
+          // ),
         ),
       ),
     );
