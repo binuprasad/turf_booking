@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/login/create_account/view/create_new_account.dart';
 import 'package:movie_tickets/login/login_home/controller/login_page_controller.dart';
 import 'package:movie_tickets/login/widgets/text_form_field.dart';
-import 'package:movie_tickets/service/login_service.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -37,7 +36,10 @@ class LoginPage extends StatelessWidget {
                   TextformField(
                     text: 'Email',
                     icon: Icons.email,
-                    validatortxt: 'Invalid email',
+                    validator: (value) {
+                      loginpageController.emailValidator(value);
+                      return null;
+                    },
                     textcontroller: loginpageController.emailcontroller,
                   ),
                   const SizedBox(height: 30),
@@ -58,7 +60,10 @@ class LoginPage extends StatelessWidget {
                       ),
                       text: 'password',
                       icon: Icons.lock,
-                      validatortxt: 'invalid phone',
+                      validator: (value) {
+                        loginpageController.passwordValidator(value);
+                        return null;
+                      },
                       textcontroller: loginpageController.passwordcontroller,
                     ),
                   ),
@@ -95,16 +100,8 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ElevatedButton(
-                onPressed: ()async {
-                  final email = loginpageController.emailcontroller.text.trim();
-                  final password = loginpageController.passwordcontroller.text.trim(); 
-              final response =    await ApiServices().loginpageService(email, password);
-                  if(response!.error == true){
-                    Get.snackbar('', response.error.toString());
-                  }
-                  else{
-                     Get.snackbar('', "Successfully logined");
-                  }
+                onPressed: () {
+                  loginpageController.loginButtonFunction();
                   loginpageController.buttonclickValidator();
                 },
                 style: ElevatedButton.styleFrom(
@@ -133,14 +130,17 @@ class LoginPage extends StatelessWidget {
                     style: GoogleFonts.akayaKanadaka(
                         fontSize: 20, color: Colors.lightBlue),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => Get.to(() =>  CreateNewAccount()),
+                      ..onTap = () => Get.to(() => CreateNewAccount()),
                   ),
                 ],
               ),
             ),
+   
           ],
         ),
       ),
     );
   }
+
+  
 }

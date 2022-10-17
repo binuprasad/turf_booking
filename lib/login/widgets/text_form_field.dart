@@ -7,19 +7,20 @@ class TextformField extends GetView<LoginPageController> {
     Key? key,
     required this.text,
     required this.icon,
-    required this.validatortxt,
+
     this.suffixIcon,
     this.eyeicon,
     this.obscure,
+     this.validator,
     required this.textcontroller
   }) : super(key: key);
   final String text;
   final IconData icon;
-  final String validatortxt;
   final bool? eyeicon;
   final Widget? suffixIcon;
   final bool? obscure;
   final TextEditingController textcontroller;
+  final String? Function(String?)? validator;
 
   final loginpagecontroller = Get.put(LoginPageController());
   @override
@@ -30,13 +31,7 @@ class TextformField extends GetView<LoginPageController> {
         controller:textcontroller ,
         obscureText: obscure ?? false,
         style: const TextStyle(color: Colors.white),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return validatortxt;
-          }
-          return null;
-        },
-        // obscureText: true ? text='Password':text='Em',
+        validator:validator,
         decoration: InputDecoration(
           suffixIcon: suffixIcon,
           prefixIcon: Icon(
@@ -51,14 +46,7 @@ class TextformField extends GetView<LoginPageController> {
           border:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          // focusedBorder: const OutlineInputBorder(
-          //   borderSide: BorderSide(color: Colors.white),
-          // ),
-          // enabledBorder: OutlineInputBorder(
-          //   borderSide: const BorderSide(
-          //     color: Colors.lightBlue,
-          //   ),
-          // ),
+          
         ),
       ),
     );

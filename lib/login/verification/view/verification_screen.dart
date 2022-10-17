@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +13,7 @@ import 'package:pinput/pinput.dart';
 class OTPverification extends StatelessWidget {
   OTPverification({Key? key}) : super(key: key);
   final otpverificationcontroller = Get.put(OTPverificationController());
-   final createNewAccountcontroller = Get.put(CreateNewAccountcontroller());
+  final createNewAccountcontroller = Get.put(CreateNewAccountcontroller());
 
   @override
   Widget build(BuildContext context) {
@@ -42,22 +41,19 @@ class OTPverification extends StatelessWidget {
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "OTP is required";
-                }
-      
-                if (value.length != 4) {
-                  return 'Invalid OTP';
-                }
+                otpverificationcontroller.verificationValidation(value);
+
                 return null;
               },
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             RichText(
               text: TextSpan(
                 text: "Don't recieve the code?",
-                style:
-                    GoogleFonts.akayaKanadaka(fontSize: 17, color: Colors.black),
+                style: GoogleFonts.akayaKanadaka(
+                    fontSize: 17, color: Colors.black),
                 children: [
                   TextSpan(
                     text: 'Resend OTP',
@@ -81,18 +77,23 @@ class OTPverification extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ElevatedButton(
-                onPressed: ()async {
-                  String otp =otpverificationcontroller.otpSignUpController.text.trim();
+                onPressed: () async {
+                  String otp =
+                      otpverificationcontroller.otpSignUpController.text.trim();
                   log("Transfer Id${createNewAccountcontroller.id}");
                   log(otp);
-                final response= await ApiServices().otpverificationService(otp,createNewAccountcontroller.id);
-                  if(response!.error == true){
+                  final response = await ApiServices().otpverificationService(
+                      otp, createNewAccountcontroller.id);
+                  if (response!.error == true) {
                     Get.snackbar('', response.message.toString());
                     log(response.message.toString());
-                  }else{
+                  } else {
                     log('no error');
-                    Get.offAll(()=>HomeScreen());
-                    Get.snackbar('Success', 'Successfully created your account ');   
+                    Get.offAll(() => HomeScreen());
+                    Get.snackbar(
+                        'Success', 'Successfully created your account ',
+                        backgroundColor: Colors.limeAccent,
+                        snackPosition: SnackPosition.BOTTOM);
                   }
                 },
                 style: ElevatedButton.styleFrom(
