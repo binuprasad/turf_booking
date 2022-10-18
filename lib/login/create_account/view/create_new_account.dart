@@ -56,13 +56,7 @@ class CreateNewAccount extends StatelessWidget {
                     text: 'Email',
                     icon: Icons.email,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'invalid Email';
-                      }
-                      if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                          .hasMatch(value)) {
-                        return 'Please a valid Email';
-                      }
+                      createNewAccountcontroller.emailValidator(value);
                       return null;
                     },
                     textcontroller: createNewAccountcontroller.emailController,
@@ -74,12 +68,7 @@ class CreateNewAccount extends StatelessWidget {
                     text: 'Password',
                     icon: Icons.lock,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'invalid Password';
-                      }
-                      if (value.length < 6) {
-                        return 'Must be more than 5 charater';
-                      }
+                      createNewAccountcontroller.passwordValidator(value);
                       return null;
                     },
                     textcontroller:
@@ -92,15 +81,8 @@ class CreateNewAccount extends StatelessWidget {
                       text: 'ConfirmPassword',
                       icon: Icons.lock,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please re-enter password';
-                        }
-                        if (createNewAccountcontroller
-                                .passwordController.text !=
-                            createNewAccountcontroller
-                                .confirmPasswordController.text) {
-                          return "Password does not match";
-                        }
+                        createNewAccountcontroller
+                            .confirmPasswordValidator(value);
                         return null;
                       },
                       textcontroller:
@@ -108,7 +90,7 @@ class CreateNewAccount extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 50),
             Container(
               height: 50,
               width: 290,
@@ -116,7 +98,7 @@ class CreateNewAccount extends StatelessWidget {
                 gradient: const LinearGradient(
                   colors: [Colors.black, Colors.lightBlue],
                 ),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: ElevatedButton(
                 onPressed: () async {
@@ -124,6 +106,7 @@ class CreateNewAccount extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
                 ),
                 child: Text(
                   'Sign in',

@@ -38,6 +38,7 @@ dependencies:
   flutter_custom_cards: ^0.2.1
   flutter_signin_button: ^2.0.0
   get: ^4.6.5
+  getwidget: ^3.0.1
   google_fonts: ^3.0.1
   lottie: ^1.4.3
   page_transition: ^2.0.9

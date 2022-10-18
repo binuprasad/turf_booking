@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-  class ErrorHandling{
-   errorHandler(Object e) {
+class ErrorHandling {
+  errorHandler(Object e) {
     if (e is DioError) {
       if (e.response?.statusCode == 401) {
         showDialogue('Server not found !');
@@ -33,11 +33,18 @@ import 'package:google_fonts/google_fonts.dart';
   void showDialogue(String text) {
     Get.dialog(
       AlertDialog(
-        title: Text(
-          'Alert',
-          style: GoogleFonts.pressStart2p(fontSize: 17),
+        backgroundColor: const Color.fromARGB(255, 144, 38, 73),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+          child: Text(
+            'Alert',
+            style: GoogleFonts.pressStart2p(fontSize: 17),
+          ),
         ),
-        content: Text(text),
+        content: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Text(text),
+        ),
         actions: [
           TextButton(
             onPressed: () {

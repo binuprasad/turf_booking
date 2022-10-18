@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_tickets/home/view/home_screen.dart';
 import 'package:movie_tickets/login/create_account/controller/create_new_account_controller.dart';
 import 'package:movie_tickets/login/verification/controller/otp_verification_controller.dart';
 import 'package:movie_tickets/service/login_service.dart';
@@ -25,17 +24,39 @@ class OTPverification extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 4.5,
             ),
-            Text(
-              'Enter the OTP if you want to login.',
-              style: GoogleFonts.andadaPro(
-                textStyle:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Enter the OTP if you want\nto login.',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.andadaPro(
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 6,
             ),
             Pinput(
+              defaultPinTheme: PinTheme(
+                width: 56,
+                height: 56,
+                textStyle: const TextStyle(
+                    fontSize: 20,
+                    color: Color.fromRGBO(30, 60, 87, 1),
+                    fontWeight: FontWeight.w600),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 47, 131, 130)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
               length: 4,
               controller: otpverificationcontroller.otpSignUpController,
               keyboardType: TextInputType.number,
@@ -84,17 +105,7 @@ class OTPverification extends StatelessWidget {
                   log(otp);
                   final response = await ApiServices().otpverificationService(
                       otp, createNewAccountcontroller.id);
-                  if (response!.error == true) {
-                    Get.snackbar('', response.message.toString());
-                    log(response.message.toString());
-                  } else {
-                    log('no error');
-                    Get.offAll(() => HomeScreen());
-                    Get.snackbar(
-                        'Success', 'Successfully created your account ',
-                        backgroundColor: Colors.limeAccent,
-                        snackPosition: SnackPosition.BOTTOM);
-                  }
+                  otpverificationcontroller.bottonOnclickCondition(response);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,

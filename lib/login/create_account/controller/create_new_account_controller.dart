@@ -10,23 +10,46 @@ class CreateNewAccountcontroller extends GetxController {
   late String id;
   final formKey = GlobalKey<FormState>();
 
-  buttonclickValidator()async {
+  buttonclickValidator() async {
     if (formKey.currentState!.validate()) {
-    String email = emailController.text.trim();
-    String password = passwordController.text.trim();
-    final response =
-        await ApiServices().createNewAccountService(email, password);
-    if (response!.error == true) {
-      Get.snackbar('', response.messege.toString(),
-          snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.black);
-    } else {
-      id = response.id!;
-      Get.to(() => OTPverification());
-    }
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      final response =
+          await ApiServices().createNewAccountService(email, password);
+      if (response!.error == true) {
+        Get.snackbar('', response.messege.toString(),
+            snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.black);
+      } else {
+        id = response.id!;
+        Get.to(() => OTPverification());
+      }
     }
   }
 
-  createAccountButtonClicked()  {
-   
+  confirmPasswordValidator(value) {
+    if (value == null || value.isEmpty) {
+      return 'Please re-enter password';
+    }
+    if (passwordController.text != confirmPasswordController.text) {
+      return "Password does not match";
+    }
+  }
+
+  passwordValidator(value) {
+    if (value == null || value.isEmpty) {
+      return 'invalid Password';
+    }
+    if (value.length < 6) {
+      return 'Must be more than 5 charater';
+    }
+  }
+
+  emailValidator(value) {
+    if (value == null || value.isEmpty) {
+      return 'invalid Email';
+    }
+    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+      return 'Please a valid Email';
+    }
   }
 }
