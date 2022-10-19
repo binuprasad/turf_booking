@@ -16,15 +16,16 @@ class BottomNavigationBarwidget extends StatelessWidget {
       ),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
+          backgroundColor: Colors.black,
           selectedItemColor: Colors.lightGreen,
           unselectedItemColor: Colors.white,
-          backgroundColor: Colors.black,
           onTap: (value) =>
               bottomNavigationBarController.selectedIndex.value = value,
           currentIndex: bottomNavigationBarController.selectedIndex.value,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.sports_soccer), label: 'Grounds'),
+            BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Favourite'),
+            // BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Favourite'),
             BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Profile'),
           ],
         ),
