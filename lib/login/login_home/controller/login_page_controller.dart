@@ -1,10 +1,9 @@
-import 'dart:io';
+import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/service/login_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPageController extends GetxController {
   final emailcontroller = TextEditingController();
@@ -14,7 +13,6 @@ class LoginPageController extends GetxController {
 
   buttonclickValidator() {
     if (formKey.currentState!.validate()) {
-      // Get.snackbar('', 'data is processing',snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.lightGreen);
       return;
     }
   }
@@ -32,6 +30,14 @@ class LoginPageController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.limeAccent);
     }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(
+      'token',
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjMyODM1NywiZXhwIjoxNjY2NDE0NzU3fQ.o93r4BmmJgPOhL2tGs3fqS6_N3c5g4isbmBoND600yU",
+    );
+    prefs.setString('refreshtoken', response.refreshToken.toString());
+    var token = prefs.getString('token');
+    log(token.toString());
   }
 
   passwordValidator(value) {
@@ -48,6 +54,4 @@ class LoginPageController extends GetxController {
       return 'invalid Email';
     }
   }
-
- 
 }

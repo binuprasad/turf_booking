@@ -13,20 +13,21 @@ class ApiServices {
 
   final Dio dio = Dio(BaseOptions(baseUrl: Endpoints.baseurl));
 
-  Future<EmailCreateAccountResponse?> createNewAccountService(
+  Future<EmailSignupRespones?> createNewAccountService(
     String email,
     String password,
   ) async {
     Map<String, dynamic> data = {"user_mail": email, "user_password": password};
     try {
       final response = await dio.post(Endpoints.signupEmail, data: data);
-      if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        return EmailCreateAccountResponse.fromjsom(response.data);
-      }
+      log("after response");
+     
+        return EmailSignupRespones.fromJson(response.data);
+    
     } catch (e) {
-      return EmailCreateAccountResponse(error: true, messege: errorHandling.errorHandler(e));
+      return EmailSignupRespones(error: true, message: errorHandling.errorHandler(e));
     }
-    return null;
+     
   }
 
 //--------------------------------------------OTP-----------------------------------//

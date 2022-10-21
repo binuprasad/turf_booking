@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_tickets/login/verification/view/verification_screen.dart';
@@ -14,14 +16,19 @@ class CreateNewAccountcontroller extends GetxController {
     if (formKey.currentState!.validate()) {
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
+     
       final response =
           await ApiServices().createNewAccountService(email, password);
+          log('before if');
       if (response!.error == true) {
-        Get.snackbar('', response.messege.toString(),
-            snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.black);
+        Get.snackbar('', response.message.toString(),
+            snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.grey);
+            log('error on create account');
       } else {
+          log('no error on create account');
         id = response.id!;
         Get.to(() => OTPverification());
+        
       }
     }
   }

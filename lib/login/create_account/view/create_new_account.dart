@@ -78,15 +78,16 @@ class CreateNewAccount extends StatelessWidget {
                     height: 20,
                   ),
                   TextformField(
-                      text: 'ConfirmPassword',
-                      icon: Icons.lock,
-                      validator: (value) {
-                        createNewAccountcontroller
-                            .confirmPasswordValidator(value);
-                        return null;
-                      },
-                      textcontroller:
-                          createNewAccountcontroller.confirmPasswordController),
+                    text: 'ConfirmPassword',
+                    icon: Icons.lock,
+                    validator: (value) {
+                      createNewAccountcontroller
+                          .confirmPasswordValidator(value);
+                      return null;
+                    },
+                    textcontroller:
+                        createNewAccountcontroller.confirmPasswordController,
+                  ),
                 ],
               ),
             ),
@@ -109,10 +110,12 @@ class CreateNewAccount extends StatelessWidget {
                   shadowColor: Colors.transparent,
                 ),
                 child: Text(
-                  'Sign in',
+                  'Signup',
                   style: GoogleFonts.andadaPro(
                     textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 30),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
               ),

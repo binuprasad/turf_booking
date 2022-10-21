@@ -1,19 +1,21 @@
-class EmailCreateAccountResponse {
-  bool? status;
-  String? id;
-  String? messege;
-  bool ? error;
-  EmailCreateAccountResponse({
+class EmailSignupRespones {
+  EmailSignupRespones({
     this.status,
     this.id,
-    this.messege,
+    this.message,
     this.error,
   });
-  factory EmailCreateAccountResponse.fromjsom(Map<String, dynamic> json) =>
-      EmailCreateAccountResponse(
+
+  bool? error;
+  bool? status;
+  String? id;
+  String? message;
+
+  factory EmailSignupRespones.fromJson(Map<String, dynamic> json) =>
+      EmailSignupRespones(
         status: json["status"],
         id: json["id"],
-        messege: json["messege"],
-        error: json["error"]??false,
+        message: json["message"],
+        error: json["error"] ?? false,
       );
 }

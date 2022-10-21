@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
+
+ 
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -6,9 +8,10 @@ import 'package:get/get.dart';
 class LocationController extends GetxController {
   RxString currentAddress = 'Unknown Location'.obs;
   dynamic currentPosition = Geolocator.getCurrentPosition().obs;
+  RxString currentAdrressToFetchHome = 'unknown location'.obs;
   @override
-  void onInit()async {
- await  getCurrentPosition();
+  void onInit()  async {
+ await     getCurrentPosition();
     super.onInit();
   }
 
@@ -49,27 +52,22 @@ class LocationController extends GetxController {
       currentPosition = position;
       getAddressFromLatLng(position);
     }).catchError((e) {
-      debugPrint(e);
+      // log(e.toString());
     });
   }
 
-
   Future<void> getAddressFromLatLng(Position position) async {
-  await placemarkFromCoordinates(
-          currentPosition!.latitude, currentPosition!.longitude)
-      .then((List<Placemark> placemarks) {
-    Placemark place = placemarks[0];
- 
+    await placemarkFromCoordinates(
+      currentPosition!.latitude,
+      currentPosition!.longitude,
+    ).then((List<Placemark> placemarks) {
+      Placemark place = placemarks[0];
+
       currentAddress.value =
-         '${place.subLocality},${place.subAdministrativeArea}';
-   
-  }).catchError((e) {
-    debugPrint(e);
-  });
- }
-
-
- 
-
- }
-
+          '${place.subLocality},${place.subAdministrativeArea}';
+          currentAdrressToFetchHome.value = place.subAdministrativeArea!;
+    }).catchError((e) {
+      // log(e.toString());
+    });
+  }
+}

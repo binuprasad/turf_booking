@@ -126,7 +126,7 @@ class LoginPage extends StatelessWidget {
                     fontSize: 20, color: Colors.black),
                 children: [
                   TextSpan(
-                    text: 'Sign in',
+                    text: ' Signup',
                     style: GoogleFonts.akayaKanadaka(
                         fontSize: 20, color: Colors.lightBlue),
                     recognizer: TapGestureRecognizer()

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +8,8 @@ import 'package:movie_tickets/home/widgets/cuatom_card2.dart';
 import 'package:movie_tickets/home/widgets/home_custom_card.dart';
 import 'package:movie_tickets/home/widgets/text_widget.dart';
 import 'package:movie_tickets/location_controller/location_controller.dart';
+import 'package:movie_tickets/splash_screen/view/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -32,18 +36,28 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Arco',
-                        style: GoogleFonts.akronim(
-                            fontSize: 70, color: Colors.white),
+                      GestureDetector(
+                        onTap: () async {
+                          SharedPreferences pref =
+                              await SharedPreferences.getInstance();
+                          pref.remove('token');
+                          Get.offAll(() => SplashScreen());
+                        },
+                        child: Text(
+                          'Arco',
+                          style: GoogleFonts.akronim(
+                              fontSize: 70, color: Colors.white),
+                        ),
                       ),
                       Row(
-                        children:  [
+                        children: [
                           const Icon(Icons.location_on, color: Colors.white),
-                          Obx(() => Text(
-                            '${locationController.currentAddress}',
-                            style: const TextStyle(color: Colors.white),
-                          ),),
+                          Obx(
+                            () => Text(
+                              '${locationController.currentAddress}',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
                         ],
                       )
                     ],
@@ -65,30 +79,42 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Center(
-                  //   child: Obx(() => DotsIndicator(
-                  //   dotsCount: homecontroller.images.length,
-                  //   position: homecontroller.currentIndex.value,
-                  //   decorator: const DotsDecorator(
-                  //     color: Colors.grey, // Inactive dot colors
-                  //     activeColor:Colors.white , // Àctive dot colors
-                  //   ),
-                  // ),)
-                  // ),
+                  const TitleText(
+                    text: 'Nearby Turf',
+                  ),
+                  SizedBox(
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        final temp = homecontroller.nearby[index];
+                        log("image${temp.id}");
+                        return CustomCard2(
+                          image: temp.turfImages!.turfImages1!,
+                          turfName: temp.turfName.toString(),
+                        );
+                      },
+                      itemCount: homecontroller.nearby.length,
+                    ),
+                  ),
                   const TitleText(
                     text: 'FootBall',
                   ),
                   SizedBox(
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      children: const [
-                        CustomCard2(image: 'assets/image/turf.jpg'),
-                        CustomCard2(image: 'assets/image/turf.jpg'),
-                        CustomCard2(image: 'assets/image/turf.jpg'),
-                        CustomCard2(image: 'assets/image/turf.jpg'),
-                      ],
+                      itemBuilder: (BuildContext context, int index) {
+                        return CustomCard2(
+                          image: homecontroller
+                              .nearby[index].turfImages!.turfImages2!,
+                          turfName:
+                              homecontroller.nearby[index].turfName.toString(),
+                        );
+                      },
+                      itemCount: homecontroller.nearby.length,
                     ),
                   ),
                   const TitleText(
@@ -97,14 +123,15 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      children: const [
-                        CustomCard2(image: 'assets/image/cricket.jpg'),
-                        CustomCard2(image: 'assets/image/cricket.jpg'),
-                        CustomCard2(image: 'assets/image/cricket.jpg'),
-                        CustomCard2(image: 'assets/image/cricket.jpg'),
-                      ],
+                      itemBuilder: (BuildContext context, int index) {
+                        return CustomCard2(
+                            image: homecontroller
+                                .nearby[index].turfImages!.turfImages3!,
+                            turfName: homecontroller.nearby[index].turfName!);
+                      },
+                      itemCount: homecontroller.nearby.length,
                     ),
                   ),
                   const TitleText(
@@ -113,14 +140,15 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      children: const [
-                        CustomCard2(image: 'assets/image/badminton.jpg'),
-                        CustomCard2(image: 'assets/image/badminton.jpg'),
-                        CustomCard2(image: 'assets/image/badminton.jpg'),
-                        CustomCard2(image: 'assets/image/badminton.jpg'),
-                      ],
+                      itemBuilder: (BuildContext context, int index) {
+                        return CustomCard2(
+                            image: homecontroller
+                                .nearby[index].turfImages!.turfImages1!,
+                            turfName: homecontroller.nearby[index].turfName!);
+                      },
+                      itemCount: homecontroller.nearby.length,
                     ),
                   ),
                   const TitleText(
@@ -129,14 +157,15 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      children: const [
-                        CustomCard2(image: 'assets/image/yoga.jpg'),
-                        CustomCard2(image: 'assets/image/yoga.jpg'),
-                        CustomCard2(image: 'assets/image/yoga.jpg'),
-                        CustomCard2(image: 'assets/image/yoga.jpg'),
-                      ],
+                      itemBuilder: (BuildContext context, int index) {
+                        return CustomCard2(
+                            image: homecontroller
+                                .nearby[index].turfImages!.turfImages1!,
+                            turfName: homecontroller.nearby[index].turfName!);
+                      },
+                      itemCount: homecontroller.nearby.length,
                     ),
                   ),
                 ],
