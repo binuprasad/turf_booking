@@ -7,7 +7,8 @@ import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
 class CustomCard2 extends StatelessWidget {
   const CustomCard2({
     Key? key,
-    required this.image, required this.turfName,
+    required this.image,
+    required this.turfName,
   }) : super(key: key);
   final String image;
   final String turfName;
@@ -15,10 +16,7 @@ class CustomCard2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      onTap: ()async{
-       
-        Get.to(()=>const TurfViewScreen());
-      },
+      
       borderColor: Colors.yellowAccent,
       borderRadius: 20.0,
       height: MediaQuery.of(context).size.height / 3.5,
@@ -36,25 +34,37 @@ class CustomCard2 extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          children: [
-            Text(turfName,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            Row(
-              children: [
-                IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark,color: Colors.white,)),
-                RatingBarIndicator(
-                  rating: 2.75,
-                  itemBuilder: (context, index) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
+        child: Container(
+          child: Column(
+            children: [
+              Text(
+                turfName,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.bookmark,
+                      color: Colors.white,
+                    ),
                   ),
-                  itemCount: 5,
-                  itemSize: 20.0,
-                  direction: Axis.horizontal,
-                ),
-              ],
-            )
-          ],
+                  RatingBarIndicator(
+                    rating: 2.75,
+                    itemBuilder: (context, index) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 20.0,
+                    direction: Axis.horizontal,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

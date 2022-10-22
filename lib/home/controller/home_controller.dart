@@ -13,7 +13,7 @@ await nearestTurf();
     super.onInit();
   }
   var currentIndex = 0.0.obs;
-  List<Datum> nearby = [];
+  RxList nearby = [].obs;
   
 
   imageInadex(double index) {
@@ -38,5 +38,7 @@ await nearestTurf();
       log('after add $nearby'.toString());
     }
   }
+
+ 
   
 }
