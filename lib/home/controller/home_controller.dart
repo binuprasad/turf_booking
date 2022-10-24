@@ -13,7 +13,7 @@ await nearestTurf();
     super.onInit();
   }
   var currentIndex = 0.0.obs;
-  RxList nearby = [].obs;
+RxList nearby = [].obs;
   
 
   imageInadex(double index) {
@@ -23,14 +23,14 @@ await nearestTurf();
 
   Future nearestTurf() async {
     // SharedPreferences pref = await SharedPreferences.getInstance();
-    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjMyODM1NywiZXhwIjoxNjY2NDE0NzU3fQ.o93r4BmmJgPOhL2tGs3fqS6_N3c5g4isbmBoND600yU";
+    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjUxMzI5NCwiZXhwIjoxNjY2NTk5Njk0fQ.JtOR5yqbvItBJGwtRcbAl3lLG30GPycB8eU6jqFn9Zc";
     const location = "Malappuram";
     
     final HomeResponse? response =
         await HomeServices().nearestTurf(location: location, token: token);
     log('message');
     //  log('before res${response!.data.toString()}');
-    log('before add $nearby'.toString());
+    log('before add $nearby'.toString()); 
     if (response != null || response!.status == true) {
       log('after add222 $nearby'.toString());
       nearby.clear();

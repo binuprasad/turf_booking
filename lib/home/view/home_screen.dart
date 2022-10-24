@@ -18,9 +18,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
+          
           image: DecorationImage(
-              image: AssetImage(
+             colorFilter: 
+      ColorFilter.mode(Colors.black.withOpacity(0.8), 
+      BlendMode.dstATop),
+              image: const AssetImage(
                 "assets/image/grass.jpg",
               ),
               fit: BoxFit.fitHeight),
@@ -81,30 +85,35 @@ class HomeScreen extends StatelessWidget {
                   const TitleText(
                     text: 'Nearby Turf',
                   ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    itemCount: homecontroller.nearby.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final data = homecontroller.nearby[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            () => TurfViewScreen(
-                              data: data,
+                  Column(
+                    children: [
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
+                        itemCount: homecontroller.nearby.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final data = homecontroller.nearby[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                () => TurfViewScreen(
+                                  data: data,
+                                ),
+                              );
+                            },
+                            child: CustomCard2(
+                              image: data.turfImages!.turfImages1!,
+                              turfName: data.turfName.toString(),
                             ),
                           );
                         },
-                        child: CustomCard2(
-                          image: data.turfImages!.turfImages1!,
-                          turfName: data.turfName.toString(),
-                        ),
-                      );
-                    },
+                      ),
+                      
+                    ],
                   ),
                 ],
               ),

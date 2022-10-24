@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
-import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
 
 class CustomCard2 extends StatelessWidget {
   const CustomCard2({
@@ -17,7 +15,6 @@ class CustomCard2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       
-      borderColor: Colors.yellowAccent,
       borderRadius: 20.0,
       height: MediaQuery.of(context).size.height / 3.5,
       width: MediaQuery.of(context).size.width / 2,
@@ -34,37 +31,46 @@ class CustomCard2 extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Container(
-          child: Column(
-            children: [
-              Text(
-                turfName,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.bookmark,
+                    color: Colors.green,
+                  ),
+                ),
+                RatingBarIndicator(
+                  rating: 2.75,
+                  itemBuilder: (context, index) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  itemCount: 5,
+                  itemSize: 20.0,
+                  direction: Axis.horizontal,
+                ),
+              ],
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 20,
+              decoration: const BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20))
+            
               ),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.bookmark,
-                      color: Colors.white,
-                    ),
-                  ),
-                  RatingBarIndicator(
-                    rating: 2.75,
-                    itemBuilder: (context, index) => const Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    itemCount: 5,
-                    itemSize: 20.0,
-                    direction: Axis.horizontal,
-                  ),
-                ],
-              )
-            ],
-          ),
+              child: Text(
+                turfName,textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),
+              ),
+            ),
+          ],
         ),
       ),
     );
