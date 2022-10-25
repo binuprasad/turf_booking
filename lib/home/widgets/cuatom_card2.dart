@@ -60,7 +60,7 @@ class CustomCard2 extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: 20,
               decoration: const BoxDecoration(
-              color: Colors.green,
+              color: Colors.greenAccent,
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20))
             
               ),

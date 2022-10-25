@@ -6,7 +6,7 @@ import 'package:movie_tickets/service/home_service.dart';
 
 class HomeController extends GetxController {
   final locationController = Get.put(LocationController());
-
+ var isLoading = true.obs;
   @override
   void onInit()async{
 await nearestTurf();
@@ -22,8 +22,9 @@ RxList nearby = [].obs;
   }
 
   Future nearestTurf() async {
+    isLoading(true);
     // SharedPreferences pref = await SharedPreferences.getInstance();
-    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjUxMzI5NCwiZXhwIjoxNjY2NTk5Njk0fQ.JtOR5yqbvItBJGwtRcbAl3lLG30GPycB8eU6jqFn9Zc";
+    String token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjYwOTk1MiwiZXhwIjoxNjY2Njk2MzUyfQ.lpaybZDbkQgf7dIOCJTdDTFVXtKzLSLsKrWP2fhRDx0";
     const location = "Malappuram";
     
     final HomeResponse? response =
@@ -37,7 +38,9 @@ RxList nearby = [].obs;
       nearby.addAll(response.data!);
       log('after add $nearby'.toString());
     }
+    isLoading(false);
   }
+  
 
  
   

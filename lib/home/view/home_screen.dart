@@ -19,15 +19,16 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration:  BoxDecoration(
+          color: Colors.greenAccent
           
-          image: DecorationImage(
-             colorFilter: 
-      ColorFilter.mode(Colors.black.withOpacity(0.8), 
-      BlendMode.dstATop),
-              image: const AssetImage(
-                "assets/image/grass.jpg",
-              ),
-              fit: BoxFit.fitHeight),
+      //     image: DecorationImage(
+      //        colorFilter: 
+      // ColorFilter.mode(Colors.black.withOpacity(0.8), 
+      // BlendMode.dstATop),
+      //         image: const AssetImage(
+      //           "assets/image/grass.jpg",
+      //         ),
+      //         fit: BoxFit.fitHeight),
         ),
         child: SafeArea(
           child: Padding(
@@ -86,7 +87,9 @@ class HomeScreen extends StatelessWidget {
                     text: 'Nearby Turf',
                   ),
                   Column(
+                    
                     children: [
+                     
                       GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -97,7 +100,10 @@ class HomeScreen extends StatelessWidget {
                         itemCount: homecontroller.nearby.length,
                         itemBuilder: (BuildContext context, int index) {
                           final data = homecontroller.nearby[index];
-                          return GestureDetector(
+                           if(homecontroller.isLoading.value){
+                        return const Center(child: CircularProgressIndicator());
+                      }else{
+                      return GestureDetector(
                             onTap: () {
                               Get.to(
                                 () => TurfViewScreen(
@@ -110,6 +116,8 @@ class HomeScreen extends StatelessWidget {
                               turfName: data.turfName.toString(),
                             ),
                           );
+                      }
+                          
                         },
                       ),
                       

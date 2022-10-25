@@ -26,4 +26,17 @@ class HomeServices {
     }
     return null;
   }
+
+  Future<HomeResponse?> allTurfs({required String token}) async {
+    try {
+      final Response response = await dio.get(Endpoints.allTurf,
+          options: Options(headers: {"Authorization": "Bearer $token"}));
+      if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+        return HomeResponse.fromJson(response.data);
+      }
+    } catch (e) {
+      ErrorHandling().errorHandler(e);
+    }
+    return null;
+  }
 }

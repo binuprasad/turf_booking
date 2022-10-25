@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_tickets/home/view/home_screen.dart';
-import 'package:movie_tickets/splash_screen/view/splash_screen.dart';
+
 
 
 void main() {
