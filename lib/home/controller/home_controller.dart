@@ -10,10 +10,12 @@ class HomeController extends GetxController {
   @override
   void onInit()async{
 await nearestTurf();
+await allTheTurfs();
     super.onInit();
   }
   var currentIndex = 0.0.obs;
-RxList nearby = [].obs;
+  List<Datum> nearby = [];
+List<Datum> allTurfList = [];
   
 
   imageInadex(double index) {
@@ -24,7 +26,7 @@ RxList nearby = [].obs;
   Future nearestTurf() async {
     isLoading(true);
     // SharedPreferences pref = await SharedPreferences.getInstance();
-    String token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjYwOTk1MiwiZXhwIjoxNjY2Njk2MzUyfQ.lpaybZDbkQgf7dIOCJTdDTFVXtKzLSLsKrWP2fhRDx0";
+    String token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjY5NjkzMSwiZXhwIjoxNjY2NzgzMzMxfQ.1NJv0_eFs2gZ54_sQOlMJsvyGMxU9KYqXBQs_E2H9ig";
     const location = "Malappuram";
     
     final HomeResponse? response =
@@ -39,6 +41,21 @@ RxList nearby = [].obs;
       log('after add $nearby'.toString());
     }
     isLoading(false);
+  }
+
+  Future allTheTurfs()async{
+    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjY5NjkzMSwiZXhwIjoxNjY2NzgzMzMxfQ.1NJv0_eFs2gZ54_sQOlMJsvyGMxU9KYqXBQs_E2H9ig";
+    final HomeResponse? response = await HomeServices().allTurfs(token: token);
+    log('entered');
+    if(response !=null || response!.status == true){
+      log('entere into condition');
+      allTurfList.clear();
+      log('before legth${allTurfList.length}');
+      allTurfList.addAll(response.data!);
+      log('legth of allturf${allTurfList.length}');
+      
+
+    }
   }
   
 

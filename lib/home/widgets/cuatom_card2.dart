@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CustomCard2 extends StatelessWidget {
   const CustomCard2({
     Key? key,
     required this.image,
-    required this.turfName,
+    required this.turfName, required this.starRating,
   }) : super(key: key);
   final String image;
   final String turfName;
+  final String starRating;
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +44,15 @@ class CustomCard2 extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                RatingBarIndicator(
-                  rating: 2.75,
-                  itemBuilder: (context, index) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  itemCount: 5,
-                  itemSize: 20.0,
-                  direction: Axis.horizontal,
-                ),
+                Row(
+                                              children:  [
+                                                const Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(starRating)
+                                              ],
+                                            ),
               ],
             ),
             Container(
@@ -67,7 +66,7 @@ class CustomCard2 extends StatelessWidget {
               child: Text(
                 turfName,textAlign: TextAlign.center,
                 style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold,color: Colors.white),
               ),
             ),
           ],
