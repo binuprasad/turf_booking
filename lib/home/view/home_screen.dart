@@ -7,6 +7,7 @@ import 'package:movie_tickets/home/widgets/cuatom_card2.dart';
 import 'package:movie_tickets/home/widgets/home_custom_card.dart';
 import 'package:movie_tickets/home/widgets/text_widget.dart';
 import 'package:movie_tickets/location_controller/location_controller.dart';
+import 'package:movie_tickets/search/view/search.dart';
 import 'package:movie_tickets/splash_screen/view/splash_screen.dart';
 import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,17 +23,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(color: Colors.greenAccent
-
-              //     image: DecorationImage(
-              //        colorFilter:
-              // ColorFilter.mode(Colors.black.withOpacity(0.8),
-              // BlendMode.dstATop),
-              //         image: const AssetImage(
-              //           "assets/image/grass.jpg",
-              //         ),
-              //         fit: BoxFit.fitHeight),
-              ),
+          decoration: const BoxDecoration(color: Colors.greenAccent),
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -57,18 +48,31 @@ class HomeScreen extends StatelessWidget {
                                 fontSize: 70, color: Colors.white),
                           ),
                         ),
-                        Row(
-                          children: [
-                            const Icon(Icons.location_on, color: Colors.white),
-                            Obx(
-                              () => Text(
-                                '${locationController.currentAddress}',
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        )
+                        IconButton(
+                          onPressed: () {
+                            Get.to(() =>  SearchScreen());
+                          },
+                          icon: const Icon(
+                            Icons.search,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
                       ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.location_on, color: Colors.white),
+                          Obx(
+                            () => Text(
+                              '${locationController.currentAddress}',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 200,
@@ -113,14 +117,16 @@ class HomeScreen extends StatelessWidget {
                               },
                               child: CustomCard2(
                                 image: data.turfImages!.turfImages1!,
-                                turfName: data.turfName.toString(), starRating: data.turfInfo!.turfRating!.toString(),
+                                turfName: data.turfName.toString(),
+                                starRating:
+                                    data.turfInfo!.turfRating!.toString(),
                               ),
                             );
                           }
-                        }, 
+                        },
                       ),
                     ),
-                    const TitleText(text: 'All Tufs'),
+                    const TitleText(text: 'All Turfs'),
                     SizedBox(
                       height: MediaQuery.of(context).size.height,
                       child: ListView.builder(
@@ -133,88 +139,96 @@ class HomeScreen extends StatelessWidget {
 
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              color: Colors.greenAccent,
-                              height: 200,
-                              width: 200,
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: 170,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                            image: NetworkImage(datas
-                                                .turfLogo
-                                                .toString()),
-                                            fit: BoxFit.fill),
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        child: Text(
-                                          datas.turfName.toString(),
-                                          style: const TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
+                            child: GestureDetector(
+                              onTap: () =>
+                                  Get.to(() => TurfViewScreen(data: datas)),
+                              child: Container(
+                                color: Colors.greenAccent,
+                                height: 200,
+                                width: 200,
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 170,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  datas.turfLogo.toString()),
+                                              fit: BoxFit.fill),
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.location_on),
-                                          Text(datas.turfPlace.toString()),
-                                        ],
-                                      ),
-                                      constwidgetsobj.ht20,
-                                      Row(
-                                        children: [
-                                          const Text('Turftype : '),Text(datas.turfType!.turfFives!
-                                          .toString()),
-                                        ],
-                                      ),
-                                      
-                                      constwidgetsobj.ht20, 
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 40),
-                                            child: Row(
-                                              children:  [
-                                                const Icon(
-                                                  Icons.star,
-                                                  color: Colors.yellow,
-                                                ),
-                                                Text(datas.turfInfo!.turfRating!.toString())
-                                              ],
-                                            ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          child: Text(
+                                            datas.turfName.toString(),
+                                            style: const TextStyle(
+                                                fontSize: 19,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Row(
-                                              children: [
-                                                IconButton(
-                                                  onPressed: () {},
-                                                  icon: const Icon(
-                                                      Icons.favorite_outline),
-                                                ),
-                                              ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(Icons.location_on),
+                                            Text(datas.turfPlace.toString()),
+                                          ],
+                                        ),
+                                        constwidgetsobj.ht20,
+                                        Row(
+                                          children: [
+                                            const Text('Turftype : '),
+                                            Text(datas.turfType!.turfFives!
+                                                .toString()),
+                                          ],
+                                        ),
+                                        constwidgetsobj.ht20,
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 40),
+                                              child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.star,
+                                                    color: Colors.yellow,
+                                                  ),
+                                                  Text(datas
+                                                      .turfInfo!.turfRating!
+                                                      .toString())
+                                                ],
+                                              ),
                                             ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ],
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              child: Row(
+                                                children: [
+                                                  IconButton(
+                                                    onPressed: () {},
+                                                    icon: const Icon(
+                                                        Icons.favorite_outline),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );

@@ -8,7 +8,7 @@ import 'package:movie_tickets/turf/view/turf.dart';
 class BottonNavigationBarController extends GetxController{
 final homeController = Get.put(HomeController());
   RxInt selectedIndex = 0.obs;
- final pages = [HomeScreen(), const ProfileScreen(),const SearchScreen(), const TurfScreen(),];
+ final pages = [HomeScreen(), const ProfileScreen(), SearchScreen(), const TurfScreen(),];
 
  navigateBottombar(int index){
   selectedIndex.value =index;
