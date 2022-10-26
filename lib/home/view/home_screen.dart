@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height,
                       child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
+                       
                         scrollDirection: Axis.vertical,
                         itemCount: homecontroller.allTurfList.length,
                         itemBuilder: (BuildContext context, int index) {
