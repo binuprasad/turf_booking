@@ -33,7 +33,7 @@ class BookNow extends StatelessWidget {
                   ),
                 )
               ]),
-              constwidgetsobj.ht30,
+              ht30,
               Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
@@ -41,36 +41,33 @@ class BookNow extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30.0)),
-                    color: Colors.blue),
+                    color: Colors.greenAccent),
                 child: Column(
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30)),
-                        image: DecorationImage(
-                            image: NetworkImage(data.turfImages!.turfImages1!),
-                            fit: BoxFit.fill),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          image: DecorationImage(
+                              image:
+                                  NetworkImage(data.turfImages!.turfImages1!),
+                              fit: BoxFit.fill),
+                        ),
                       ),
                     ),
-                    constwidgetsobj.ht10,
-                    
-                   
+                  ht10,
                     TabBar(
-                  labelStyle: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20,color: Colors.greenAccent),
-                  indicator:
-                      const UnderlineTabIndicator(borderSide: BorderSide.none),
-                  controller: booknowController.controller,
-                  tabs: booknowController.myTap
-                  //  const [
-                  //      Tab(text: 'app'),
-                  //       Tab(text: 'Developer',),
-                  //       ],
-                  ),
+                        labelStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.greenAccent),
+                        indicator: const UnderlineTabIndicator(
+                            borderSide: BorderSide.none),
+                        controller: booknowController.controller,
+                        tabs: booknowController.myTap),
                     CustomCard(
                       color: const Color.fromARGB(255, 235, 239, 230),
                       elevation: 15,
@@ -109,11 +106,6 @@ class BookNow extends StatelessWidget {
                             ],
                           )),
                     ),
-
-                    // const Text('Price Details'),
-                    // const PriceText(timeText: 'Morning : ', pricetext: '700'),
-                    // const PriceText(pricetext: ' 500', timeText: 'Noon :'),
-                    // const PriceText(pricetext: ' 900', timeText: 'Evening :')
                   ],
                 ),
               ),

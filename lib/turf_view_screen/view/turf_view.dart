@@ -4,10 +4,11 @@ import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/book_now/view/book_now.dart';
-import 'package:movie_tickets/constant/constant_widget.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:movie_tickets/turf_view_screen/widgets/amenties_text.dart';
 import 'package:movie_tickets/turf_view_screen/widgets/turf_time%20-widget.dart';
+
+import '../../constant/constant_widget.dart';
 
 class TurfViewScreen extends StatelessWidget {
   const TurfViewScreen({Key? key, required this.data}) : super(key: key);
@@ -31,9 +32,10 @@ class TurfViewScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.greenAccent, Colors.white],
-          ),
+          color: Colors.greenAccent
+          // gradient: LinearGradient(
+          //   colors: [Colors.purple, Colors.white,Colors.black,Colors.red,Colors.yellow,Colors.blue,Colors.pink],
+          // ),
         ),
         child: SafeArea(
           child: SingleChildScrollView(
@@ -64,7 +66,7 @@ class TurfViewScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: MediaQuery.of(context).size.height / 2.5,
+                    height: MediaQuery.of(context).size.height / 3.5,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       borderRadius:
@@ -88,7 +90,7 @@ class TurfViewScreen extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          constwidgetsobj.ht10,
+                          ht10,
                           Text(
                             data.turfName!,
                             style: const TextStyle(
@@ -136,7 +138,7 @@ class TurfViewScreen extends StatelessWidget {
                                 "${data.turfTime!.timeMorningEnd!.toString()}Am",
                             time: 'Morning: ',
                           ),
-                          constwidgetsobj.ht5,
+                        ht5,
                           
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -148,7 +150,7 @@ class TurfViewScreen extends StatelessWidget {
                                 textend:
                                     "${data.turfTime!.timeAfternoonEnd!.toString()}Pm"),
                           ),
-                          constwidgetsobj.ht5,
+                          ht5,
                           Turfschedulings(
                               data: data,
                               textstart:

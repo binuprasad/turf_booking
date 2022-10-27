@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            Get.to(() =>  SearchScreen());
+                            Get.to(() => SearchScreen());
                           },
                           icon: const Icon(
                             Icons.search,
@@ -92,9 +92,7 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const TitleText(
-                      text: 'Nearby Turf',
-                    ),
+                    const TitleText(text: 'Nearby Turf'),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 3,
                       width: MediaQuery.of(context).size.width,
@@ -110,13 +108,11 @@ class HomeScreen extends StatelessWidget {
                             return GestureDetector(
                               onTap: () {
                                 Get.to(
-                                  () => TurfViewScreen(
-                                    data: data,
-                                  ),
+                                  () => TurfViewScreen(data: data),
                                 );
                               },
                               child: CustomCard2(
-                                image: data.turfImages!.turfImages1!,
+                                image: data.turfLogo.toString(),
                                 turfName: data.turfName.toString(),
                                 starRating:
                                     data.turfInfo!.turfRating!.toString(),
@@ -131,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height,
                       child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                       
+                        shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: homecontroller.allTurfList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -182,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                                             Text(datas.turfPlace.toString()),
                                           ],
                                         ),
-                                        constwidgetsobj.ht20,
+                                      ht20,
                                         Row(
                                           children: [
                                             const Text('Turftype : '),
@@ -190,7 +186,7 @@ class HomeScreen extends StatelessWidget {
                                                 .toString()),
                                           ],
                                         ),
-                                        constwidgetsobj.ht20,
+                                        ht20,
                                         Row(
                                           children: [
                                             Padding(
@@ -201,7 +197,7 @@ class HomeScreen extends StatelessWidget {
                                                 children: [
                                                   const Icon(
                                                     Icons.star,
-                                                    color: Colors.yellow,
+                                                    color: Colors.yellow
                                                   ),
                                                   Text(datas
                                                       .turfInfo!.turfRating!

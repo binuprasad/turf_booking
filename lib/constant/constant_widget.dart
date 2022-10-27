@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-final constwidgetsobj = ConstWidgets();
 
-class ConstWidgets {
-  final ht5 = const SizedBox(height: 5);
-  final ht10 = const SizedBox(height: 10);
-  final ht20 = const SizedBox(height: 20);
-  final ht30 = const SizedBox(height: 30);
-}
+
+
+  const ht5 = SizedBox(height: 5);
+  const ht10 = SizedBox(height: 10);
+  const ht20 = SizedBox(height: 20);
+  const ht30 = SizedBox(height: 30);

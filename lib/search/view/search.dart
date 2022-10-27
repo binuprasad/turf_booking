@@ -14,10 +14,12 @@ class SearchScreen extends GetView<SearchController> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.greenAccent, Colors.white])),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.greenAccent, Colors.white],
+        ),
+      ),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -140,7 +142,7 @@ class SearchScreen extends GetView<SearchController> {
                                                       .toString()),
                                                 ],
                                               ),
-                                              constwidgetsobj.ht20,
+                                            ht20,
                                               Row(
                                                 children: [
                                                   const Text('Turftype : '),
@@ -149,7 +151,7 @@ class SearchScreen extends GetView<SearchController> {
                                                       .toString()),
                                                 ],
                                               ),
-                                              constwidgetsobj.ht20,
+                                              ht20,
                                               Row(
                                                 children: [
                                                   Padding(
@@ -194,7 +196,7 @@ class SearchScreen extends GetView<SearchController> {
                               },
                             ),
                           )
-                        : const Text(
+                        :const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),
                           ),
