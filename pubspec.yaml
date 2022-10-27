@@ -46,7 +46,9 @@ dependencies:
   lottie: ^1.4.3
   page_transition: ^2.0.9
   pinput: ^2.2.16
+  shaky_animated_listview: ^0.0.5
   shared_preferences: ^2.0.15
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
