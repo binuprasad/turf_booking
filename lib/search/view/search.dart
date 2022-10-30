@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:movie_tickets/search/controller/search_controller.dart';
 import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
@@ -33,14 +34,14 @@ class SearchScreen extends GetView<SearchController> {
                 Get.back();
               },
               icon: const Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_ios,
                 color: Colors.black,
               ),
             ),
-            title: const Text(
+            title:  Text(
               'Search Your Turfs',
               style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                  GoogleFonts.ptSerif(color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),
           body: Padding(
@@ -142,13 +143,28 @@ class SearchScreen extends GetView<SearchController> {
                                                       .toString()),
                                                 ],
                                               ),
-                                            ht20,
+                                              ht20,
                                               Row(
                                                 children: [
                                                   const Text('Turftype : '),
-                                                  Text(datas
-                                                      .turfType!.turfFives!
-                                                      .toString()),
+                                                  datas.turfType!.turfFives!
+                                                      ? const Text(
+                                                          '5s',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )
+                                                      : const Text(''),
+                                                  datas.turfType!.turfSevens!
+                                                      ? const Text(
+                                                          '&7s',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )
+                                                      : const Text('')
                                                 ],
                                               ),
                                               ht20,
@@ -196,7 +212,7 @@ class SearchScreen extends GetView<SearchController> {
                               },
                             ),
                           )
-                        :const Text(
+                        : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),
                           ),

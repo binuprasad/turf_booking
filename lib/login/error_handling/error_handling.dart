@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +32,7 @@ class ErrorHandling {
   void showDialogue(String text) {
     Get.dialog(
       AlertDialog(
-        backgroundColor: const Color.fromARGB(255, 144, 38, 73),
+        backgroundColor: const Color.fromARGB(255, 238, 233, 235),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
           child: Text(

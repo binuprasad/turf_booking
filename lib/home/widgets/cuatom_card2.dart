@@ -5,7 +5,8 @@ class CustomCard2 extends StatelessWidget {
   const CustomCard2({
     Key? key,
     required this.image,
-    required this.turfName, required this.starRating,
+    required this.turfName,
+    required this.starRating,
   }) : super(key: key);
   final String image;
   final String turfName;
@@ -14,9 +15,8 @@ class CustomCard2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      
       borderRadius: 20.0,
-      height: MediaQuery.of(context).size.height / 3.5,
+      height: MediaQuery.of(context).size.height / 4.0,
       width: MediaQuery.of(context).size.width / 2,
       childPadding: 0,
       child: Container(
@@ -34,7 +34,6 @@ class CustomCard2 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            
             Row(
               children: [
                 IconButton(
@@ -45,28 +44,31 @@ class CustomCard2 extends StatelessWidget {
                   ),
                 ),
                 Row(
-                                              children:  [
-                                                const Icon(
-                                                  Icons.star,
-                                                  color: Colors.amber,
-                                                ),
-                                                Text(starRating)
-                                              ],
-                                            ),
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    Text(starRating)
+                  ],
+                ),
               ],
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 20,
               decoration: const BoxDecoration(
-              color: Colors.greenAccent,
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20))
-            
-              ),
+                  color: Colors.greenAccent,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20))),
               child: Text(
-                turfName,textAlign: TextAlign.center,
-                style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold,color: Colors.white),
+                turfName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
           ],

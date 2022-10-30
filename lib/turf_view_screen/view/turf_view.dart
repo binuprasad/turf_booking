@@ -93,8 +93,8 @@ class TurfViewScreen extends StatelessWidget {
                           ht10,
                           Text(
                             data.turfName!,
-                            style: const TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
+                            style:  GoogleFonts.notoSerif(
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
                             height: 10,
@@ -122,9 +122,9 @@ class TurfViewScreen extends StatelessWidget {
                             height: 10,
                           ),
                           const Divider(),
-                          const Text(
+                           Text(
                             'Turf Time',
-                            style: TextStyle(
+                            style: GoogleFonts.notoSerif(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
@@ -159,9 +159,9 @@ class TurfViewScreen extends StatelessWidget {
                               textend:
                                   "${data.turfTime!.timeEveningEnd!.toString()}Pm"),
                           const Divider(),
-                          const Text(
+                           Text(
                             'Amenities',
-                            style: TextStyle(
+                            style: GoogleFonts.notoSerif(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(

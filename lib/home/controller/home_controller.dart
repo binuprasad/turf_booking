@@ -6,17 +6,17 @@ import 'package:movie_tickets/service/home_service.dart';
 
 class HomeController extends GetxController {
   final locationController = Get.put(LocationController());
- var isLoading = true.obs;
+  var isLoading = true.obs;
   @override
-  void onInit()async{
-await nearestTurf();
-await allTheTurfs();
+  void onInit() async {
+    await nearestTurf();
+    await allTheTurfs();
     super.onInit();
   }
+
   var currentIndex = 0.0.obs;
   List<Datum> nearby = [];
-List<Datum> allTurfList = [];
-  
+  List<Datum> allTurfList = [];
 
   imageInadex(double index) {
     currentIndex.value = index;
@@ -24,16 +24,18 @@ List<Datum> allTurfList = [];
   }
 
   Future nearestTurf() async {
+    update();
     isLoading(true);
     // SharedPreferences pref = await SharedPreferences.getInstance();
-    String token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2Njc4NDc4OSwiZXhwIjoxNjY2ODcxMTg5fQ.LcXlo93bflXbNgiKiwEifM9-gYh3g1QXf9Ywl8o5kvw";
+    String token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzAzNDExOCwiZXhwIjoxNjY3MTIwNTE4fQ.o-ZAR2XXnj033skNeYxelrH4E0MLnzjK-_0HJ8xe_ro";
     const location = "Malappuram";
-    
+
     final HomeResponse? response =
         await HomeServices().nearestTurf(location: location, token: token);
     log('message');
     //  log('before res${response!.data.toString()}');
-    log('before add $nearby'.toString()); 
+    log('before add $nearby'.toString());
     if (response != null || response!.status == true) {
       log('after add222 $nearby'.toString());
       nearby.clear();
@@ -41,24 +43,22 @@ List<Datum> allTurfList = [];
       log('after add $nearby'.toString());
     }
     isLoading(false);
+    update();
   }
 
-  Future allTheTurfs()async{
-    String token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2Njc4NDc4OSwiZXhwIjoxNjY2ODcxMTg5fQ.LcXlo93bflXbNgiKiwEifM9-gYh3g1QXf9Ywl8o5kvw";
+  Future allTheTurfs() async {
+    update();
+    String token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzAzNDExOCwiZXhwIjoxNjY3MTIwNTE4fQ.o-ZAR2XXnj033skNeYxelrH4E0MLnzjK-_0HJ8xe_ro";
     final HomeResponse? response = await HomeServices().allTurfs(token: token);
     log('entered');
-    if(response !=null || response!.status == true){
+    if (response != null || response!.status == true) {
       log('entere into condition');
       allTurfList.clear();
       log('before legth${allTurfList.length}');
       allTurfList.addAll(response.data!);
       log('legth of allturf${allTurfList.length}');
-      
-
     }
+    update();
   }
-  
-
- 
-  
 }

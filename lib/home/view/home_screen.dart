@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const TitleText(text: 'Nearby Turf'),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 3,
+                      height: MediaQuery.of(context).size.height / 3.7,
                       width: MediaQuery.of(context).size.width,
                       child: ListView.builder(
                         itemCount: homecontroller.nearby.length,
@@ -178,12 +178,16 @@ class HomeScreen extends StatelessWidget {
                                             Text(datas.turfPlace.toString()),
                                           ],
                                         ),
-                                      ht20,
+                                        ht20,
                                         Row(
                                           children: [
                                             const Text('Turftype : '),
-                                            Text(datas.turfType!.turfFives!
-                                                .toString()),
+                                            datas.turfType!.turfFives!
+                                                ? const Text('5s',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                : const Text(''),
+                                            datas.turfType!.turfSevens!
+                                                ? const Text('&7s',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                : const Text('')
                                           ],
                                         ),
                                         ht20,
@@ -195,10 +199,8 @@ class HomeScreen extends StatelessWidget {
                                                       horizontal: 40),
                                               child: Row(
                                                 children: [
-                                                  const Icon(
-                                                    Icons.star,
-                                                    color: Colors.yellow
-                                                  ),
+                                                  const Icon(Icons.star,
+                                                      color: Colors.yellow),
                                                   Text(datas
                                                       .turfInfo!.turfRating!
                                                       .toString())

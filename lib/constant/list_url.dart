@@ -5,5 +5,6 @@ class Endpoints{
   static const String emailOtpVerify = "/account/verify-email-otp";
   static const String nearestTurf = "/user/nearest-turf/";
   static const String  allTurf = "/user/all-turf";
+  static const String wishList = "/user/get-whishlist/{id}";
 
 }
