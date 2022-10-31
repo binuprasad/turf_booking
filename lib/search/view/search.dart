@@ -61,7 +61,7 @@ class SearchScreen extends GetView<SearchController> {
                         color: Colors.white,
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(15.0),
                         borderSide: const BorderSide(
                           color: Colors.white,
                         ),
@@ -100,15 +100,15 @@ class SearchScreen extends GetView<SearchController> {
                                       color: Colors.greenAccent,
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              4.5,
+                                              5.0,
                                       width: MediaQuery.of(context).size.width,
                                       child: Row(
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(6.0),
                                             child: Container(
-                                              height: 170,
-                                              width: 150,
+                                              height: MediaQuery.of(context).size.height,
+                                              width: MediaQuery.of(context).size.width/3,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(20),
@@ -125,7 +125,7 @@ class SearchScreen extends GetView<SearchController> {
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        horizontal: 20,
+                                                        horizontal: 32,
                                                         vertical: 10),
                                                 child: Text(
                                                   datas.turfName.toString(),
@@ -143,7 +143,7 @@ class SearchScreen extends GetView<SearchController> {
                                                       .toString()),
                                                 ],
                                               ),
-                                              ht20,
+                                              ht10,
                                               Row(
                                                 children: [
                                                   const Text('Turftype : '),
@@ -151,29 +151,25 @@ class SearchScreen extends GetView<SearchController> {
                                                       ? const Text(
                                                           '5s',
                                                           style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
+                                                            ),
                                                         )
                                                       : const Text(''),
                                                   datas.turfType!.turfSevens!
                                                       ? const Text(
                                                           '&7s',
                                                           style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
+                                                              ),
                                                         )
                                                       : const Text('')
                                                 ],
                                               ),
-                                              ht20,
+                                         
                                               Row(
                                                 children: [
                                                   Padding(
                                                     padding: const EdgeInsets
                                                             .symmetric(
-                                                        horizontal: 40),
+                                                        horizontal: 10),
                                                     child: Row(
                                                       children: [
                                                         const Icon(

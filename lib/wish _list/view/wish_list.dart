@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/constant/constant_widget.dart';
+import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:shaky_animated_listview/scroll_animator.dart';
 
 class WishList extends StatelessWidget {
-  const WishList({Key? key}) : super(key: key);
+   WishList({Key? key}) : super(key: key);
+  final homeScreencontroller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +30,9 @@ class WishList extends StatelessWidget {
               GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 3,
+                  crossAxisCount: 2,
                   children: List.generate(
-                    20,
+                    homeScreencontroller.allTurfList.length,
                     (i) => GridAnimatorWidget(
                       child: Padding(
                         padding: const EdgeInsets.all(4),
@@ -38,9 +41,9 @@ class WishList extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
-                                  image: const DecorationImage(
+                                  image:  DecorationImage(
                                       image: NetworkImage(
-                                        'https://png.pngitem.com/pimgs/s/191-1910146_2019-turf-wars-presidents-day-cup-smoking-sign.png',
+                                        homeScreencontroller.allTurfList[i].turfLogo!,
                                       ),
                                       fit: BoxFit.fill)),
                             ),

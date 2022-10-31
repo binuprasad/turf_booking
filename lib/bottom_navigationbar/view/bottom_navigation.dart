@@ -24,7 +24,7 @@ class BottomNavigationBarwidget extends StatelessWidget {
           currentIndex: bottomNavigationBarController.selectedIndex.value,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Favourite'),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite_outline), label: 'Favourite'),
           
             BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Profile'),
           ],

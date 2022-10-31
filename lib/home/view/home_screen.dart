@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const TitleText(text: 'Nearby Turf'),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 3.7,
+                      height: MediaQuery.of(context).size.height / 3.8,
                       width: MediaQuery.of(context).size.width,
                       child: ListView.builder(
                         itemCount: homecontroller.nearby.length,
@@ -140,15 +140,15 @@ class HomeScreen extends StatelessWidget {
                                   Get.to(() => TurfViewScreen(data: datas)),
                               child: Container(
                                 color: Colors.greenAccent,
-                                height: 200,
+                                height: 150,
                                 width: 200,
                                 child: Row(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        height: 170,
-                                        width: 150,
+                                        height: MediaQuery.of(context).size.height,
+                                        width: MediaQuery.of(context).size.width/3,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20),
@@ -159,71 +159,75 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          child: Text(
-                                            datas.turfName.toString(),
-                                            style: const TextStyle(
-                                                fontSize: 19,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(Icons.location_on),
-                                            Text(datas.turfPlace.toString()),
-                                          ],
-                                        ),
-                                        ht20,
-                                        Row(
-                                          children: [
-                                            const Text('Turftype : '),
-                                            datas.turfType!.turfFives!
-                                                ? const Text('5s',style: TextStyle(fontWeight: FontWeight.bold),)
-                                                : const Text(''),
-                                            datas.turfType!.turfSevens!
-                                                ? const Text('&7s',style: TextStyle(fontWeight: FontWeight.bold),)
-                                                : const Text('')
-                                          ],
-                                        ),
-                                        ht20,
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 40),
-                                              child: Row(
-                                                children: [
-                                                  const Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Text(datas
-                                                      .turfInfo!.turfRating!
-                                                      .toString())
-                                                ],
-                                              ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 2),
+                                      child: Column(
+                                        
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 10),
+                                            child: Text(
+                                              datas.turfName.toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Row(
-                                                children: [
-                                                  IconButton(
-                                                    onPressed: () {},
-                                                    icon: const Icon(
-                                                        Icons.favorite_outline),
-                                                  ),
-                                                ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Icon(Icons.location_on),
+                                              Text(datas.turfPlace.toString()),
+                                            ],
+                                          ),
+                                          ht10,
+                                          Row(
+                                            children: [
+                                              const Text('Turftype : '),
+                                              datas.turfType!.turfFives!
+                                                  ? const Text('5s',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                  : const Text(''),
+                                              datas.turfType!.turfSevens!
+                                                  ? const Text('&7s',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                  : const Text('')
+                                            ],
+                                          ),
+                                          ht10,
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 40),
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(Icons.star,
+                                                        color: Colors.yellow),
+                                                    Text(datas
+                                                        .turfInfo!.turfRating!
+                                                        .toString())
+                                                  ],
+                                                ),
                                               ),
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                child: Row(
+                                                  children: [
+                                                    IconButton(
+                                                      onPressed: () {},
+                                                      icon: const Icon(
+                                                          Icons.favorite_outline),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

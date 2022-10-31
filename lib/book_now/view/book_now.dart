@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:get/get.dart';
 import 'package:movie_tickets/book_now/controller/booknow_controller.dart';
 import 'package:movie_tickets/constant/constant_widget.dart';
@@ -58,54 +57,52 @@ class BookNow extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ht10,
-                    TabBar(
-                        labelStyle: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.greenAccent),
-                        indicator: const UnderlineTabIndicator(
-                            borderSide: BorderSide.none),
-                        controller: booknowController.controller,
-                        tabs: booknowController.myTap),
-                    CustomCard(
-                      color: const Color.fromARGB(255, 235, 239, 230),
-                      elevation: 15,
-                      shadowColor: Colors.green,
-                      borderRadius: 30,
-                      height: MediaQuery.of(context).size.height / 2,
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TabBarView(
-                            controller: booknowController.controller,
-                            children: const [
-                              Center(
-                                child: Text(
-                                  'Morning',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  'Noon',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  'Evening',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ),
+                    ht10,
+                    // TabBar(
+                    //     labelStyle: const TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //         fontSize: 20,
+                    //         color: Colors.greenAccent),
+                    //     indicator: const UnderlineTabIndicator(
+                    //         borderSide: BorderSide.none),
+                    //     controller: booknowController.controller,
+                    //     tabs: booknowController.myTap),
+                    // CustomCard(
+                    //   color: const Color.fromARGB(255, 235, 239, 230),
+                    //   elevation: 15,
+                    //   shadowColor: Colors.green,
+                    //   borderRadius: 30,
+                    //   height: MediaQuery.of(context).size.height / 2,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: TabBarView(
+                    //       controller: booknowController.controller,
+                    //       children: const [
+                    //         Center(
+                    //           child: Text(
+                    //             'Morning',
+                    //             style: TextStyle(
+                    //                 fontWeight: FontWeight.bold, fontSize: 20),
+                    //           ),
+                    //         ),
+                    //         Center(
+                    //           child: Text(
+                    //             'Noon',
+                    //             style: TextStyle(
+                    //                 fontWeight: FontWeight.bold, fontSize: 20),
+                    //           ),
+                    //         ),
+                    //         Center(
+                    //           child: Text(
+                    //             'Evening',
+                    //             style: TextStyle(
+                    //                 fontWeight: FontWeight.bold, fontSize: 20),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

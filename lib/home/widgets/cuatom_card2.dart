@@ -39,8 +39,8 @@ class CustomCard2 extends StatelessWidget {
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.bookmark,
-                    color: Colors.green,
+                    Icons.favorite_outline,
+                    color: Colors.black,
                   ),
                 ),
                 Row(

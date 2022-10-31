@@ -4,6 +4,7 @@ import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/book_now/view/book_now.dart';
+import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:movie_tickets/turf_view_screen/widgets/amenties_text.dart';
 import 'package:movie_tickets/turf_view_screen/widgets/turf_time%20-widget.dart';
@@ -51,6 +52,7 @@ class TurfViewScreen extends StatelessWidget {
                       icon: const Icon(
                         Icons.arrow_back_ios_new,
                         size: 30,
+                        color: white,
                       ),
                     ),
                     Padding(
@@ -58,7 +60,7 @@ class TurfViewScreen extends StatelessWidget {
                       child: Text(
                         'Arco',
                         style: GoogleFonts.akronim(
-                            fontSize: 70, color: Colors.black),
+                            fontSize: 70, color: white),
                       ),
                     ),
                   ],
@@ -69,6 +71,7 @@ class TurfViewScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 3.5,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
+                      border: Border.all(color: white),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20.0)),
                       image: DecorationImage(
@@ -187,7 +190,7 @@ class TurfViewScreen extends StatelessWidget {
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children:const [
                                   AmenitiesText(
                                       icon: Icons.local_hospital,
                                       text: 'First Aid'),

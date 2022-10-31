@@ -28,7 +28,7 @@ class HomeController extends GetxController {
     isLoading(true);
     // SharedPreferences pref = await SharedPreferences.getInstance();
     String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzAzNDExOCwiZXhwIjoxNjY3MTIwNTE4fQ.o-ZAR2XXnj033skNeYxelrH4E0MLnzjK-_0HJ8xe_ro";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzIxNzY1NCwiZXhwIjoxNjY3MzA0MDU0fQ.a98ZZVYU1bAT7BQ_R9vLq0EbjKAFXX7vwqIqAX9JUl8";
     const location = "Malappuram";
 
     final HomeResponse? response =
@@ -49,7 +49,7 @@ class HomeController extends GetxController {
   Future allTheTurfs() async {
     update();
     String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzAzNDExOCwiZXhwIjoxNjY3MTIwNTE4fQ.o-ZAR2XXnj033skNeYxelrH4E0MLnzjK-_0HJ8xe_ro";
+         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzIxNzY1NCwiZXhwIjoxNjY3MzA0MDU0fQ.a98ZZVYU1bAT7BQ_R9vLq0EbjKAFXX7vwqIqAX9JUl8";
     final HomeResponse? response = await HomeServices().allTurfs(token: token);
     log('entered');
     if (response != null || response!.status == true) {
