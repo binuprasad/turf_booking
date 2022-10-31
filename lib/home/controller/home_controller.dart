@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:movie_tickets/location_controller/location_controller.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:movie_tickets/service/home_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   final locationController = Get.put(LocationController());
@@ -26,13 +27,12 @@ class HomeController extends GetxController {
   Future nearestTurf() async {
     update();
     isLoading(true);
-    // SharedPreferences pref = await SharedPreferences.getInstance();
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzIxNzY1NCwiZXhwIjoxNjY3MzA0MDU0fQ.a98ZZVYU1bAT7BQ_R9vLq0EbjKAFXX7vwqIqAX9JUl8";
+    SharedPreferences prf = await SharedPreferences.getInstance();
+    final token = prf.getString('token');
     const location = "Malappuram";
 
     final HomeResponse? response =
-        await HomeServices().nearestTurf(location: location, token: token);
+        await HomeServices().nearestTurf(location: location, token: token!);
     log('message');
     //  log('before res${response!.data.toString()}');
     log('before add $nearby'.toString());

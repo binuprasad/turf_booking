@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenController extends GetxController {
 
-  final homeConrtroller =Get.put(HomeController());
+  // final homeConrtroller =Get.put(HomeController());
   checkUserLogin() async {
     
     SharedPreferences prf = await SharedPreferences.getInstance();
@@ -30,7 +30,7 @@ class SplashScreenController extends GetxController {
   void onInit()async {
   await  checkUserLogin();
     log("splash oninit");
- await homeConrtroller.nearestTurf();
+//  await homeConrtroller.nearestTurf();
   log("splash oninit22222");
     super.onInit();
   }

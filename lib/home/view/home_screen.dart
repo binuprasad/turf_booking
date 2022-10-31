@@ -7,6 +7,7 @@ import 'package:movie_tickets/home/widgets/cuatom_card2.dart';
 import 'package:movie_tickets/home/widgets/home_custom_card.dart';
 import 'package:movie_tickets/home/widgets/text_widget.dart';
 import 'package:movie_tickets/location_controller/location_controller.dart';
+import 'package:movie_tickets/login/login_home/view/login_page.dart';
 import 'package:movie_tickets/search/view/search.dart';
 import 'package:movie_tickets/splash_screen/view/splash_screen.dart';
 import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                             SharedPreferences pref =
                                 await SharedPreferences.getInstance();
                             pref.remove('token');
-                            Get.offAll(() => SplashScreen());
+                            Get.offAll(() => LoginPage());
                           },
                           child: Text(
                             'Arco',

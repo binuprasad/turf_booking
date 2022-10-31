@@ -33,7 +33,7 @@ class LoginPageController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(
       'token',
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NjMyODM1NywiZXhwIjoxNjY2NDE0NzU3fQ.o93r4BmmJgPOhL2tGs3fqS6_N3c5g4isbmBoND600yU",
+      response.token!
     );
     prefs.setString('refreshtoken', response.refreshToken.toString());
     var token = prefs.getString('token');

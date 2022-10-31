@@ -104,8 +104,11 @@ class OTPverification extends StatelessWidget {
                   log("Transfer Id${createNewAccountcontroller.id}");
                   log(otp);
                   final response = await ApiServices().otpverificationService(
-                      otp, createNewAccountcontroller.id);
-                  otpverificationcontroller.bottonOnclickCondition(response);
+                    otp,
+                    createNewAccountcontroller.id,
+                  );
+
+                  otpverificationcontroller.bottonOnclickCondition(response!);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_tickets/bottom_navigationbar/view/bottom_navigation.dart';
+import 'package:movie_tickets/splash_screen/view/splash_screen.dart';
 
 
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BottomNavigationBarwidget(),
+      home: SplashScreen(),
     );
   }
 }
