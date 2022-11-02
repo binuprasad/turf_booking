@@ -1,6 +1,9 @@
+import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/book_now/controller/booknow_controller.dart';
+import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/constant/constant_widget.dart';
 import 'package:movie_tickets/model/home_model.dart';
 
@@ -11,101 +14,173 @@ class BookNow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Container(
+        color: black,
+        height: MediaQuery.of(context).size.height / 13,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              color: green,
+              width: MediaQuery.of(context).size.width / 2,
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'TotalPrice :1500',
+                    style: TextStyle(color: white),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              color: white,
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.height,
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Book ',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: green),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
       backgroundColor: Colors.greenAccent,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
+          child: Stack(
             children: [
-              Row(children: [
-                IconButton(
-                  onPressed: () => Get.back(),
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 30,
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 100),
-                  child: Text(
-                    "Book Now",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                )
-              ]),
-              ht30,
+              SizedBox(height: MediaQuery.of(context).size.height + 150),
               Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                    boxShadow: [BoxShadow(blurRadius: 20.0)],
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30.0)),
-                    color: Colors.greenAccent),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          image: DecorationImage(
-                              image:
-                                  NetworkImage(data.turfImages!.turfImages1!),
-                              fit: BoxFit.fill),
-                        ),
-                      ),
-                    ),
-                    ht10,
-                    // TabBar(
-                    //     labelStyle: const TextStyle(
-                    //         fontWeight: FontWeight.bold,
-                    //         fontSize: 20,
-                    //         color: Colors.greenAccent),
-                    //     indicator: const UnderlineTabIndicator(
-                    //         borderSide: BorderSide.none),
-                    //     controller: booknowController.controller,
-                    //     tabs: booknowController.myTap),
-                    // CustomCard(
-                    //   color: const Color.fromARGB(255, 235, 239, 230),
-                    //   elevation: 15,
-                    //   shadowColor: Colors.green,
-                    //   borderRadius: 30,
-                    //   height: MediaQuery.of(context).size.height / 2,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //     child: TabBarView(
-                    //       controller: booknowController.controller,
-                    //       children: const [
-                    //         Center(
-                    //           child: Text(
-                    //             'Morning',
-                    //             style: TextStyle(
-                    //                 fontWeight: FontWeight.bold, fontSize: 20),
-                    //           ),
-                    //         ),
-                    //         Center(
-                    //           child: Text(
-                    //             'Noon',
-                    //             style: TextStyle(
-                    //                 fontWeight: FontWeight.bold, fontSize: 20),
-                    //           ),
-                    //         ),
-                    //         Center(
-                    //           child: Text(
-                    //             'Evening',
-                    //             style: TextStyle(
-                    //                 fontWeight: FontWeight.bold, fontSize: 20),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3.5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(0.0),
+                  image: DecorationImage(
+                      image: NetworkImage(data.turfImages!.turfImages1!),
+                      fit: BoxFit.fill),
                 ),
               ),
+              Positioned(
+                child: IconButton(
+                  onPressed: () => Get.back(),
+                  icon: CircleAvatar(
+                    backgroundColor: white.withOpacity(0.5),
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 30,
+                      color: black,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: MediaQuery.of(context).size.height / 4.1,
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                      boxShadow: [BoxShadow(blurRadius: 20.0)],
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30.0)),
+                      color: appColor),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ht10,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DatePicker(
+                                // Expanded(child: Icon(icon),)
+                                DateTime.now(),
+                                daysCount: 31,
+                                initialSelectedDate: DateTime.now(),
+                                selectionColor: black,
+                                selectedTextColor: white,
+                                onDateChange: (date) {
+                                  // New date selected
+
+                                  booknowController.selectedValue = date;
+                                },
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime.now().add(
+                                    const Duration(days: 100),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(Icons.date_range),
+                            ),
+                          ],
+                        ),
+                        ListTile(
+                          leading: const BookingTimeHeading(heading: 'Morning'),
+                          trailing: Text(
+                              '   ₹${data.turfPrice!.morningPrice!.toString()}'),
+                        ),
+                        ht5,
+                        Wrap(
+                          children: const [
+                            ChoiceContainer(time: '6:00 Am'),
+                            ChoiceContainer(time: '7:00 Am'),
+                            ChoiceContainer(time: '8:00Am'),
+                            ChoiceContainer(time: '9:00 Am'),
+                            ChoiceContainer(time: '10:00 Am'),
+                            ChoiceContainer(time: '11:00Am')
+                          ],
+                        ),
+                        ListTile(
+                          leading:
+                              const BookingTimeHeading(heading: 'Afternoon'),
+                          trailing: Text(
+                              '₹${data.turfPrice!.afternoonPrice!.toString()}'),
+                        ),
+                        Wrap(
+                          children: const [
+                            ChoiceContainer(time: '12:00 Pm'),
+                            ChoiceContainer(time: '1:00 Pm'),
+                            ChoiceContainer(time: '2:00 Pm'),
+                            ChoiceContainer(time: '3:00 Am'),
+                          ],
+                        ),
+                        ListTile(
+                          leading: const BookingTimeHeading(heading: 'Evening'),
+                          trailing: Text(
+                              ' ₹${data.turfPrice!.eveningPrice!.toString()}'),
+                        ),
+                        Wrap(
+                          children: const [
+                            ChoiceContainer(time: '6:00 Pm'),
+                            ChoiceContainer(time: '7:00 Pm'),
+                            ChoiceContainer(time: '8:00 Pm'),
+                            ChoiceContainer(time: '9:00 Pm'),
+                            ChoiceContainer(time: '10:00 Pm'),
+                            ChoiceContainer(time: '11:00Pm')
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -114,26 +189,44 @@ class BookNow extends StatelessWidget {
   }
 }
 
-class PriceText extends StatelessWidget {
-  const PriceText({Key? key, required this.pricetext, required this.timeText})
-      : super(key: key);
-  final String timeText;
-  final String pricetext;
+class BookingTimeHeading extends StatelessWidget {
+  const BookingTimeHeading({
+    Key? key,
+    required this.heading,
+  }) : super(key: key);
+  final String heading;
+
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        text: timeText,
-        style: const TextStyle(
-            fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-        children: [
-          TextSpan(
-            text: pricetext,
-            style: const TextStyle(
-              fontSize: 15,
-            ),
+    return Text(
+      heading,
+      style: GoogleFonts.ptSerif(fontSize: 20, fontWeight: FontWeight.w700),
+    );
+  }
+}
+
+class ChoiceContainer extends StatelessWidget {
+  const ChoiceContainer({
+    Key? key,
+    required this.time,
+  }) : super(key: key);
+  final String time;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Container(
+        height: MediaQuery.of(context).size.height / 14,
+        width: MediaQuery.of(context).size.width / 3.5,
+        decoration: BoxDecoration(
+            color: green, borderRadius: BorderRadius.circular(20)),
+        child: Center(
+          child: Text(
+            time,
+            style: const TextStyle(fontWeight: FontWeight.w800),
           ),
-        ],
+        ),
       ),
     );
   }

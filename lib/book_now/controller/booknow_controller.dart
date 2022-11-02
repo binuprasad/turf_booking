@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class BookNowController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController controller;
+   DateTime selectedValue = DateTime.now();
 
   final List<Tab> myTap = [
     const Tab(text: 'Morning',),

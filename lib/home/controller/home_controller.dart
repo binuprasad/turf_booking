@@ -34,7 +34,6 @@ class HomeController extends GetxController {
     final HomeResponse? response =
         await HomeServices().nearestTurf(location: location, token: token!);
     log('message');
-    //  log('before res${response!.data.toString()}');
     log('before add $nearby'.toString());
     if (response != null || response!.status == true) {
       log('after add222 $nearby'.toString());
@@ -48,9 +47,10 @@ class HomeController extends GetxController {
 
   Future allTheTurfs() async {
     update();
-    String token =
-         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTEzMTMxNjIyYWU2OTg0ZWQ2NzhhNyIsImlhdCI6MTY2NzIxNzY1NCwiZXhwIjoxNjY3MzA0MDU0fQ.a98ZZVYU1bAT7BQ_R9vLq0EbjKAFXX7vwqIqAX9JUl8";
-    final HomeResponse? response = await HomeServices().allTurfs(token: token);
+    
+    SharedPreferences prf = await SharedPreferences.getInstance();
+    final token = prf.getString('token');
+    final HomeResponse? response = await HomeServices().allTurfs(token: token!);
     log('entered');
     if (response != null || response!.status == true) {
       log('entere into condition');
