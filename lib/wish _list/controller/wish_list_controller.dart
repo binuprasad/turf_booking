@@ -6,12 +6,12 @@ class WishListController extends GetxController{
  List<Datum>favTurf = [];
  final homescreencontroller = Get.put(HomeController());
 
- favouriteCondition(int index){
-  if(homescreencontroller.allTurfList.contains(homescreencontroller.allTurfList[index].turfName)){
-    favTurf.removeAt(index);
-  }else{
-    // favTurf.add(value)
-  }
- }
+//  favouriteCondition(int index){
+//   if(homescreencontroller.allTurfList.contains(homescreencontroller.allTurfList[index].turfName)){
+//     favTurf.removeAt(index);
+//   }else{
+//     // favTurf.add(value)
+//   }
+//  }
 
 }

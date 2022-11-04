@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_tickets/login/verification/view/verification_screen.dart';
 import 'package:movie_tickets/service/login_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateNewAccountcontroller extends GetxController {
   final emailController = TextEditingController();

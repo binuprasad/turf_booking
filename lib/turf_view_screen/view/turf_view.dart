@@ -3,32 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_tickets/book_now/controller/booknow_controller.dart';
 import 'package:movie_tickets/book_now/view/book_now.dart';
 import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:movie_tickets/turf_view_screen/widgets/amenties_text.dart';
-import 'package:movie_tickets/turf_view_screen/widgets/turf_time%20-widget.dart';
-
+import 'package:movie_tickets/turf_view_screen/widgets/turf_time_widget.dart';
 import '../../constant/constant_widget.dart';
 
 class TurfViewScreen extends StatelessWidget {
-  const TurfViewScreen({Key? key, required this.data}) : super(key: key);
+TurfViewScreen({Key? key, required this.data}) : super(key: key);
   final Datum data;
+  final bookNowController = Get.put(BookNowController());
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(color: Colors.greenAccent
-            // gradient: LinearGradient(
-            //   colors: [Colors.purple, Colors.white,Colors.black,Colors.red,Colors.yellow,Colors.blue,Colors.pink],
-            // ),
-            ),
+        decoration: const BoxDecoration(color: Colors.greenAccent),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Stack(
@@ -41,23 +38,26 @@ class TurfViewScreen extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(20.0)),
                           image: DecorationImage(
-                              image: NetworkImage(data.turfImages!.turfImages1!),
+                              image:
+                                  NetworkImage(data.turfImages!.turfImages1!),
                               fit: BoxFit.fill),
                         ),
                       ),
-                      Positioned(child:IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: CircleAvatar(
-                          backgroundColor: white.withOpacity(0.6),
-                          child: const Icon(
-                            Icons.arrow_back_ios_new,
-                            size: 25,
-                            color: green,
+                      Positioned(
+                        child: IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: CircleAvatar(
+                            backgroundColor: white.withOpacity(0.6),
+                            child: const Icon(
+                              Icons.arrow_back_ios_new,
+                              size: 25,
+                              color: green,
+                            ),
                           ),
                         ),
-                      ), )
+                      )
                     ],
                   ),
                 ),
@@ -69,16 +69,16 @@ class TurfViewScreen extends StatelessWidget {
                     child: Container(
                       height: MediaQuery.of(context).size.height / 1.8,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: const LinearGradient(colors: [appColor,white])
-                      ),
+                          borderRadius: BorderRadius.circular(20),
+                          gradient:
+                              const LinearGradient(colors: [appColor, white])),
                       child: Column(
                         children: [
                           ht10,
                           Text(
                             data.turfName!,
                             style: GoogleFonts.notoSerif(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                                fontSize: 25, fontWeight: FontWeight.bold,color: green),
                           ),
                           const SizedBox(
                             height: 10,
@@ -109,43 +109,43 @@ class TurfViewScreen extends StatelessWidget {
                           Text(
                             'Turf Time',
                             style: GoogleFonts.notoSerif(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold,color: green),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          Turfschedulings(
+                          TurfSchedulings(
                             data: data,
                             textstart:
-                                '${data.turfTime!.timeMorningStart!.toString()}Am -',
+                                '${bookNowController.convertedList[0]}Am -',
                             textend:
-                                "${data.turfTime!.timeMorningEnd!.toString()}Am",
+                                "${bookNowController.convertedList[1]}Am",
                             time: 'Morning: ',
                           ),
                           ht5,
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Turfschedulings(
+                            child: TurfSchedulings(
                                 data: data,
                                 textstart:
-                                    "${data.turfTime!.timeAfternoonStart!.toString()}Pm -",
-                                time: "Noon: ",
+                                    "${bookNowController.convertedList[2]} Pm -",
+                                time: "    Noon: ",
                                 textend:
-                                    "${data.turfTime!.timeAfternoonEnd!.toString()}Pm"),
+                                    "${bookNowController.convertedList[3]}Pm"),
                           ),
                           ht5,
-                          Turfschedulings(
+                          TurfSchedulings(
                               data: data,
                               textstart:
-                                  "${data.turfTime!.timeEveningStart!.toString()}Pm -",
+                                  "${bookNowController.convertedList[4]}Pm -",
                               time: "Evening: ",
                               textend:
-                                  "${data.turfTime!.timeEveningEnd!.toString()}Pm"),
+                                  "${bookNowController.convertedList[5]}Pm"),
                           const Divider(),
                           Text(
                             'Amenities',
                             style: GoogleFonts.notoSerif(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold,color: green),
                           ),
                           const SizedBox(
                             height: 5,
@@ -202,6 +202,9 @@ class TurfViewScreen extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Get.to(() => BookNow(data: data));
+            bookNowController. convert24ToNormalTime(data);
+             bookNowController.splitTime();
+
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
           child: const Text(

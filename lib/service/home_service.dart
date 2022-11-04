@@ -37,7 +37,7 @@ class HomeServices {
         return HomeResponse.fromJson(response.data);
       }
     } catch (e) {
-      ErrorHandling().errorHandler(e); 
+      ErrorHandling().errorHandler(e);
     }
     return null;
   }

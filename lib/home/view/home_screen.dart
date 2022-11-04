@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_tickets/book_now/controller/booknow_controller.dart';
 import 'package:movie_tickets/constant/constant_widget.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:movie_tickets/home/widgets/cuatom_card2.dart';
@@ -9,7 +10,6 @@ import 'package:movie_tickets/home/widgets/text_widget.dart';
 import 'package:movie_tickets/location_controller/location_controller.dart';
 import 'package:movie_tickets/login/login_home/view/login_page.dart';
 import 'package:movie_tickets/search/view/search.dart';
-import 'package:movie_tickets/splash_screen/view/splash_screen.dart';
 import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final homecontroller = Get.put(HomeController());
   final locationController = Get.put(LocationController());
+  final bookNowController = Get.put(BookNowController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,9 +109,8 @@ class HomeScreen extends StatelessWidget {
                           } else {
                             return GestureDetector(
                               onTap: () {
-                                Get.to(
-                                  () => TurfViewScreen(data: data),
-                                );
+                                Get.to(() => TurfViewScreen(data: data));
+                                bookNowController.convert24ToNormalTime(data);
                               },
                               child: CustomCard2(
                                 image: data.turfLogo.toString(),
@@ -137,8 +137,10 @@ class HomeScreen extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
-                              onTap: () =>
-                                  Get.to(() => TurfViewScreen(data: datas)),
+                              onTap: () {
+                                  Get.to(() => TurfViewScreen(data: datas));
+                                bookNowController.convert24ToNormalTime(datas);
+                        },
                               child: Container(
                                 color: Colors.greenAccent,
                                 height: 150,
@@ -148,8 +150,11 @@ class HomeScreen extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        height: MediaQuery.of(context).size.height,
-                                        width: MediaQuery.of(context).size.width/3,
+                                        height:
+                                            MediaQuery.of(context).size.height,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20),
@@ -163,7 +168,6 @@ class HomeScreen extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 2),
                                       child: Column(
-                                        
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -187,10 +191,20 @@ class HomeScreen extends StatelessWidget {
                                             children: [
                                               const Text('Turftype : '),
                                               datas.turfType!.turfFives!
-                                                  ? const Text('5s',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                  ? const Text(
+                                                      '5s',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )
                                                   : const Text(''),
                                               datas.turfType!.turfSevens!
-                                                  ? const Text('&7s',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                  ? const Text(
+                                                      '&7s',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )
                                                   : const Text('')
                                             ],
                                           ),
@@ -219,8 +233,8 @@ class HomeScreen extends StatelessWidget {
                                                   children: [
                                                     IconButton(
                                                       onPressed: () {},
-                                                      icon: const Icon(
-                                                          Icons.favorite_outline),
+                                                      icon: const Icon(Icons
+                                                          .favorite_outline),
                                                     ),
                                                   ],
                                                 ),

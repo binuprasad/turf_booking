@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_tickets/model/home_model.dart';
 
-class Turfschedulings extends StatelessWidget {
-  const Turfschedulings({
+class TurfSchedulings extends StatelessWidget {
+  const TurfSchedulings({
     Key? key,
     required this.data,
     required this.textstart,

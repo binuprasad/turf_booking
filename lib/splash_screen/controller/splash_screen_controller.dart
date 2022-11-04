@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:get/get.dart';
-import 'package:movie_tickets/home/controller/home_controller.dart';
-import 'package:movie_tickets/home/view/home_screen.dart';
+import 'package:movie_tickets/bottom_navigationbar/view/bottom_navigation.dart';
 import 'package:movie_tickets/login/login_home/view/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +21,7 @@ class SplashScreenController extends GetxController {
         const Duration(seconds: 2),
       );
 
-      return Get.offAll(() => HomeScreen());
+      return Get.offAll(() => BottomNavigationBarwidget());
     }
   }
 
