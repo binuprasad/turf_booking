@@ -106,7 +106,10 @@ class BookNow extends StatelessWidget {
                               (index) => GestureDetector(
                                 onTap: () {
                                   booknowController.slotBooking(
-                                      index, booknowController.morning);
+                                   index:  index,
+                                  list:   booknowController.morning,
+                                  price: data.turfPrice!.morningPrice!
+                                  );
                                 },
                                 child: ChoiceContainer(
                                   time: '${booknowController.morning[index]}',
@@ -132,7 +135,9 @@ class BookNow extends StatelessWidget {
                               (index) => GestureDetector(
                                 onTap: () {
                                   booknowController.slotBooking(
-                                      index, booknowController.afterNoon);
+                                      index: index,
+                                      list: booknowController.afterNoon,
+                                      price: data.turfPrice!.afternoonPrice!);
                                 },
                                 child: ChoiceContainer(
                                   time: '${booknowController.afterNoon[index]}',
@@ -157,7 +162,9 @@ class BookNow extends StatelessWidget {
                               (index) => GestureDetector(
                                 onTap: () {
                                   booknowController.slotBooking(
-                                      index, booknowController.evening);
+                                      index: index,
+                                      list: booknowController.evening,
+                                      price: data.turfPrice!.eveningPrice!);
                                 },
                                 child: ChoiceContainer(
                                     contains: booknowController.slotList
@@ -182,13 +189,13 @@ class BookNow extends StatelessWidget {
         height: MediaQuery.of(context).size.height / 13,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            BottomNavigationContainer(
-              text: 'TotalPrice:1400',
+          children:  [
+            Obx(() => BottomNavigationContainer(
+              text: 'TotalPrice:${booknowController.totalPrice}',
               backgrounColor: green,
               textColor: white,
-            ),
-            BottomNavigationContainer(
+            ),),
+            const BottomNavigationContainer(
               text: 'Book',
               backgrounColor: white,
               textColor: green,

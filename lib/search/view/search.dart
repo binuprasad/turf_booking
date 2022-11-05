@@ -38,10 +38,10 @@ class SearchScreen extends GetView<SearchController> {
                 color: Colors.black,
               ),
             ),
-            title:  Text(
+            title: Text(
               'Search Your Turfs',
-              style:
-                  GoogleFonts.ptSerif(color: Colors.black, fontWeight: FontWeight.bold),
+              style: GoogleFonts.ptSerif(
+                  color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),
           body: Padding(
@@ -107,8 +107,13 @@ class SearchScreen extends GetView<SearchController> {
                                           Padding(
                                             padding: const EdgeInsets.all(6.0),
                                             child: Container(
-                                              height: MediaQuery.of(context).size.height,
-                                              width: MediaQuery.of(context).size.width/3,
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(20),
@@ -148,22 +153,13 @@ class SearchScreen extends GetView<SearchController> {
                                                 children: [
                                                   const Text('Turftype : '),
                                                   datas.turfType!.turfFives!
-                                                      ? const Text(
-                                                          '5s',
-                                                          style: TextStyle(
-                                                            ),
-                                                        )
+                                                      ? const Text('5s')
                                                       : const Text(''),
                                                   datas.turfType!.turfSevens!
-                                                      ? const Text(
-                                                          '&7s',
-                                                          style: TextStyle(
-                                                              ),
-                                                        )
+                                                      ? const Text('&7s')
                                                       : const Text('')
                                                 ],
                                               ),
-                                         
                                               Row(
                                                 children: [
                                                   Padding(

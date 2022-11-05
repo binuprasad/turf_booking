@@ -6,15 +6,13 @@ import 'package:movie_tickets/model/home_model.dart';
 class BookNowController extends GetxController {
   DateTime selectedValue = DateTime.now();
   bool selected = false;
-
+  RxInt totalPrice = 0.obs;
   List morning = [];
   List afterNoon = [];
   List evening = [];
   List allTime = [];
   List convertedList = [];
   List slotList = [];
-  
-  
 
   convert24ToNormalTime(Datum data) {
     allTime.clear();
@@ -43,24 +41,25 @@ class BookNowController extends GetxController {
     evening.clear();
     afterNoon.clear();
     for (int i = convertedList[0]; i < convertedList[1]; i++) {
-      morning.addAll(['$i Am - ${i + 1} Am']);
+      morning.addAll(['$i :00 - ${i + 1} :00']);
     }
 
     for (int i = convertedList[2]; i < convertedList[3]; i++) {
-      afterNoon.addAll(['$i Pm - ${i + 1} Pm']);
+      afterNoon.addAll(['$i :00 - ${i + 1} :00']);
     }
 
     for (int i = convertedList[4]; i < convertedList[5]; i++) {
-      evening.addAll(['$i Pm - ${i + 1} Pm']);
+      evening.addAll(['$i :00 - ${i + 1} :00 ']);
     }
   }
 
-  slotBooking( int index , list){
-    if(slotList.contains(list[index])){
+  slotBooking({required int index, required list, required int price}) {
+    if (slotList.contains(list[index])) {
+      totalPrice -= price;
       slotList.remove(list[index]);
-    }else{
+    } else {
+      totalPrice += price;
       slotList.add(list[index]);
-      log('$slotList ----selectedslot lidst ');
     }
     update();
   }

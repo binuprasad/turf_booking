@@ -12,10 +12,10 @@ import 'package:movie_tickets/turf_view_screen/widgets/turf_time_widget.dart';
 import '../../constant/constant_widget.dart';
 
 class TurfViewScreen extends StatelessWidget {
-TurfViewScreen({Key? key, required this.data}) : super(key: key);
+  TurfViewScreen({Key? key, required this.data}) : super(key: key);
   final Datum data;
   final bookNowController = Get.put(BookNowController());
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +78,9 @@ TurfViewScreen({Key? key, required this.data}) : super(key: key);
                           Text(
                             data.turfName!,
                             style: GoogleFonts.notoSerif(
-                                fontSize: 25, fontWeight: FontWeight.bold,color: green),
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: green),
                           ),
                           const SizedBox(
                             height: 10,
@@ -109,7 +111,9 @@ TurfViewScreen({Key? key, required this.data}) : super(key: key);
                           Text(
                             'Turf Time',
                             style: GoogleFonts.notoSerif(
-                                fontSize: 20, fontWeight: FontWeight.bold,color: green),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: green),
                           ),
                           const SizedBox(
                             height: 10,
@@ -118,8 +122,7 @@ TurfViewScreen({Key? key, required this.data}) : super(key: key);
                             data: data,
                             textstart:
                                 '${bookNowController.convertedList[0]}Am -',
-                            textend:
-                                "${bookNowController.convertedList[1]}Am",
+                            textend: "${bookNowController.convertedList[1]}Am",
                             time: 'Morning: ',
                           ),
                           ht5,
@@ -145,7 +148,9 @@ TurfViewScreen({Key? key, required this.data}) : super(key: key);
                           Text(
                             'Amenities',
                             style: GoogleFonts.notoSerif(
-                                fontSize: 20, fontWeight: FontWeight.bold,color: green),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: green),
                           ),
                           const SizedBox(
                             height: 5,
@@ -201,11 +206,12 @@ TurfViewScreen({Key? key, required this.data}) : super(key: key);
         width: MediaQuery.of(context).size.width / 1.3,
         child: ElevatedButton(
           onPressed: () {
-            Get.to(() => BookNow(data: data));
-            bookNowController. convert24ToNormalTime(data);
-             bookNowController.splitTime();
-             
+            bookNowController.totalPrice.value = 0;
+            bookNowController.slotList.clear();
 
+            Get.to(() => BookNow(data: data));
+            bookNowController.convert24ToNormalTime(data);
+            bookNowController.splitTime();
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
           child: const Text(

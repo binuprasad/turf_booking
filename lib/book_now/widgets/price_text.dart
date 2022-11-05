@@ -13,6 +13,6 @@ class PriceText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-       text,style: const TextStyle(color: white,fontSize: 20),);
+       text,style: const TextStyle(color: blueGrey,fontSize: 20),);
   }
 }
