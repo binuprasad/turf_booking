@@ -204,6 +204,7 @@ TurfViewScreen({Key? key, required this.data}) : super(key: key);
             Get.to(() => BookNow(data: data));
             bookNowController. convert24ToNormalTime(data);
              bookNowController.splitTime();
+             
 
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
