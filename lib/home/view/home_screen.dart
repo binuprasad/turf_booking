@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/book_now/controller/booknow_controller.dart';
+import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/constant/constant_widget.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:movie_tickets/home/widgets/cuatom_card2.dart';
@@ -98,124 +99,132 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 3.8,
                       width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                        itemCount: homecontroller.nearby.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          final data = homecontroller.nearby[index];
-                          if (homecontroller.isLoading.value) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else {
-                            return GestureDetector(
-                              onTap: () {
-                                Get.to(() => TurfViewScreen(data: data));
-                                bookNowController.convert24ToNormalTime(data);
-                              },
-                              child: CustomCard2(
-                                image: data.turfLogo.toString(),
-                                turfName: data.turfName.toString(),
-                                starRating:
-                                    data.turfInfo!.turfRating!.toString(),
-                              ),
-                            );
-                          }
-                        },
+                      child: GetBuilder<HomeController>(
+                        builder: (controller) => ListView.builder(
+                          itemCount: homecontroller.nearby.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            final data = homecontroller.nearby[index];
+                            if (homecontroller.isLoading.value) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else {
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.to(() => TurfViewScreen(data: data));
+                                  bookNowController.convert24ToNormalTime(data);
+                                },
+                                child: CustomCard2(
+                                  image: data.turfLogo.toString(),
+                                  turfName: data.turfName.toString(),
+                                  starRating:
+                                      data.turfInfo!.turfRating!.toString(),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ),
                     const TitleText(text: 'All Turfs'),
-                    SizedBox(
+                    Container(
+                      decoration: const BoxDecoration(gradient: appGradient),
                       height: MediaQuery.of(context).size.height,
-                      child: ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: homecontroller.allTurfList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final datas = homecontroller.allTurfList[index];
-
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
+                      child: GetBuilder<HomeController>(
+                        builder: (controller) => ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: homecontroller.allTurfList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final datas = homecontroller.allTurfList[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
                                   Get.to(() => TurfViewScreen(data: datas));
-                                bookNowController.convert24ToNormalTime(datas);
-                        },
-                              child: Container(
-                                color: Colors.greenAccent,
-                                height: 150,
-                                width: 200,
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                3,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  datas.turfLogo.toString()),
-                                              fit: BoxFit.fill),
+                                  bookNowController
+                                      .convert24ToNormalTime(datas);
+                                },
+                                child: Container(
+                                  color: appColor,
+                                  height:
+                                      MediaQuery.of(context).size.height / 5,
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    datas.turfLogo.toString()),
+                                                fit: BoxFit.fill),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 2),
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 10),
-                                            child: Text(
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                15,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10.0, top: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
                                               datas.turfName.toString(),
-                                              style: const TextStyle(
+                                              style: GoogleFonts.ptSerif(
                                                   fontSize: 19,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
+                                                  color: green),
                                             ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Icon(Icons.location_on),
-                                              Text(datas.turfPlace.toString()),
-                                            ],
-                                          ),
-                                          ht10,
-                                          Row(
-                                            children: [
-                                              const Text('Turftype : '),
-                                              datas.turfType!.turfFives!
-                                                  ? const Text(
-                                                      '5s',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    )
-                                                  : const Text(''),
-                                              datas.turfType!.turfSevens!
-                                                  ? const Text(
-                                                      '&7s',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    )
-                                                  : const Text('')
-                                            ],
-                                          ),
-                                          ht10,
-                                          Row(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 40),
-                                                child: Row(
+                                            ht10,
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  datas.turfPlace.toString(),
+                                                  style: GoogleFonts.ptSerif(),
+                                                ),
+                                                const Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.blueGrey,
+                                                ),
+                                              ],
+                                            ),
+                                            ht10,
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'TurfCapacity : ',
+                                                  style: GoogleFonts.ptSerif(),
+                                                ),
+                                                datas.turfType!.turfFives!
+                                                    ? const Text('5s')
+                                                    : const Text(''),
+                                                datas.turfType!.turfSevens!
+                                                    ? const Text('&7s')
+                                                    : const Text('')
+                                              ],
+                                            ),
+                                            ht10,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Row(
                                                   children: [
                                                     const Icon(Icons.star,
                                                         color: Colors.yellow),
@@ -224,32 +233,29 @@ class HomeScreen extends StatelessWidget {
                                                         .toString())
                                                   ],
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 10),
-                                                child: Row(
-                                                  children: [
-                                                    IconButton(
-                                                      onPressed: () {},
-                                                      icon: const Icon(Icons
-                                                          .favorite_outline),
-                                                    ),
-                                                  ],
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                 ),
-                                              )
-                                            ],
-                                          )
-                                        ],
+                                                IconButton(
+                                                  onPressed: () {},
+                                                  icon: const Icon(
+                                                      Icons.favorite_outline),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],

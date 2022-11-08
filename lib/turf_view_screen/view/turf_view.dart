@@ -82,9 +82,7 @@ class TurfViewScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: green),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          ht10,
                           RichText(
                             text: TextSpan(
                               text: 'Location:',
@@ -104,9 +102,7 @@ class TurfViewScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          ht10,
                           const Divider(),
                           Text(
                             'Turf Time',
@@ -115,9 +111,7 @@ class TurfViewScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: green),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          ht10,
                           TurfSchedulings(
                             data: data,
                             textstart:
@@ -152,9 +146,7 @@ class TurfViewScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: green),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          ht5,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -167,7 +159,7 @@ class TurfViewScreen extends StatelessWidget {
                                       icon: Icons.local_drink,
                                       text: 'Drinking Water'),
                                   AmenitiesText(
-                                      icon: Icons.wc, text: ' Wash Room'),
+                                      icon: Icons.wc, text: 'Wash Room'),
                                   AmenitiesText(
                                       icon: Icons.local_parking,
                                       text: 'Parking'),
@@ -193,9 +185,7 @@ class TurfViewScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                ht30
               ],
             ),
           ),
@@ -208,7 +198,6 @@ class TurfViewScreen extends StatelessWidget {
           onPressed: () {
             bookNowController.totalPrice.value = 0;
             bookNowController.slotList.clear();
-
             Get.to(() => BookNow(data: data));
             bookNowController.convert24ToNormalTime(data);
             bookNowController.splitTime();

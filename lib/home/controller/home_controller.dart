@@ -14,7 +14,7 @@ class HomeController extends GetxController {
     await allTheTurfs();
     super.onInit();
   }
-
+ 
   var currentIndex = 0.0.obs;
   List<Datum> nearby = [];
   List<Datum> allTurfList = [];
@@ -25,7 +25,6 @@ class HomeController extends GetxController {
   }
 
   Future nearestTurf() async {
-    update();
     isLoading(true);
     SharedPreferences prf = await SharedPreferences.getInstance();
     final token = prf.getString('token');
@@ -46,7 +45,6 @@ class HomeController extends GetxController {
   }
 
   Future allTheTurfs() async {
-    update();
     
     SharedPreferences prf = await SharedPreferences.getInstance();
     final token = prf.getString('token');
