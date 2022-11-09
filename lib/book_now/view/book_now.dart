@@ -106,10 +106,9 @@ class BookNow extends StatelessWidget {
                               (index) => GestureDetector(
                                 onTap: () {
                                   booknowController.slotBooking(
-                                   index:  index,
-                                  list:   booknowController.morning,
-                                  price: data.turfPrice!.morningPrice!
-                                  );
+                                      index: index,
+                                      list: booknowController.morning,
+                                      price: data.turfPrice!.morningPrice!);
                                 },
                                 child: ChoiceContainer(
                                   time: '${booknowController.morning[index]}',
@@ -167,11 +166,10 @@ class BookNow extends StatelessWidget {
                                       price: data.turfPrice!.eveningPrice!);
                                 },
                                 child: ChoiceContainer(
-                                    contains: booknowController.slotList
-                                        .contains(
-                                            booknowController.evening[index]),
-                                    time:
-                                        '${booknowController.evening[index]}'),
+                                  contains: booknowController.slotList.contains(
+                                      booknowController.evening[index]),
+                                  time: '${booknowController.evening[index]}',
+                                ),
                               ),
                             ),
                           ),
@@ -189,12 +187,17 @@ class BookNow extends StatelessWidget {
         height: MediaQuery.of(context).size.height / 13,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children:  [
-            Obx(() => BottomNavigationContainer(
-              text: 'TotalPrice:${booknowController.totalPrice}',
-              backgrounColor: green,
-              textColor: white,
-            ),),
+          children: [
+            Obx(
+              () => GestureDetector(
+                onTap: () {},
+                child: BottomNavigationContainer(
+                  text: 'TotalPrice:${booknowController.totalPrice}',
+                  backgrounColor: green,
+                  textColor: white,
+                ),
+              ),
+            ),
             const BottomNavigationContainer(
               text: 'Book',
               backgrounColor: white,

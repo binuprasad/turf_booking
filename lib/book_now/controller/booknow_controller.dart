@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/model/home_model.dart';
 
 class BookNowController extends GetxController {
@@ -12,6 +13,10 @@ class BookNowController extends GetxController {
   List allTime = [];
   List convertedList = [];
   List slotList = [];
+  List unconverted = [];
+  List unconvertedMorning = [];
+  List unconvertedAfterNoon = [];
+  List unconvertedEvening = [];
 
   convert24ToNormalTime(Datum data) {
     allTime.clear();
@@ -62,4 +67,54 @@ class BookNowController extends GetxController {
     }
     update();
   }
+
+//   dateAndTimeNow({required String value,required String heading}) {
+//     final now = DateTime.now().hour;
+//  int dateTime = int.parse(value.trim().split(":").first);
+
+//  if (heading == "Morning"){
+//   dateTime;
+//  }else{
+//   dateTime+12;
+//  }
+
+//  if(now >=dateTime){
+//  black;
+//  }else if(slotList.contains(value)){
+//   blueGrey;
+
+//  }else{
+//   green;
+
+//  }
+  dateAndTimenow(int index,List list) {
+    final now = DateTime.now().hour;
+    // int dateTime = int.parse(slotList[index].trim().split(":").first);
+    
+    
+for (var i = 0; i < allTime.length; i++) {
+    unconverted.add(allTime[i]);
+    log('$unconverted ---------unconverted list');
+  }
+  for(int i =unconverted[0];i<unconverted[1];i++){
+  unconvertedMorning.add(i);
+  log("$unconvertedMorning --unconverted morning list");
+  }
+  for(int i =unconverted[2];i<unconverted[3];i++){
+  unconvertedAfterNoon.add(i);
+  log("$unconvertedAfterNoon --unconverted afternoon list");
+  }
+  for(int i =unconverted[4];i<unconverted[5];i++){
+  unconvertedEvening.add(i);
+  log("$unconvertedEvening --unconverted evening list");
+  }
+  if(unconvertedMorning[index]<=now ||unconvertedAfterNoon[index]<now|| unconvertedEvening[index]<now){
+    return red;
+  }
+ else if(slotList.contains(list[index])){
+    return blueGrey;
+  }else{
+    return green;
+  }
+}
 }
