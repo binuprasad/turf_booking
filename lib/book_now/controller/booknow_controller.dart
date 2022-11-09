@@ -1,5 +1,9 @@
 import 'dart:developer';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/model/home_model.dart';
 
@@ -13,10 +17,6 @@ class BookNowController extends GetxController {
   List allTime = [];
   List convertedList = [];
   List slotList = [];
-  List unconverted = [];
-  List unconvertedMorning = [];
-  List unconvertedAfterNoon = [];
-  List unconvertedEvening = [];
 
   convert24ToNormalTime(Datum data) {
     allTime.clear();
@@ -57,64 +57,78 @@ class BookNowController extends GetxController {
     }
   }
 
-  slotBooking({required int index, required list, required int price}) {
-    if (slotList.contains(list[index])) {
-      totalPrice -= price;
-      slotList.remove(list[index]);
+  slotBooking({
+    required int index,
+    required list,
+    required int price,
+    required String key,
+  }) {
+    String temp = list[index].trim().split(":").first;
+    int selectedTime = 0;
+    int dateTimeNow = DateTime.now().hour;
+    // log('$dateTimeNow ----date time. now');
+    // log('$selectedTime ----ontap time');
+    if (key != "morning") {
+      selectedTime = int.parse(temp) + 12;
     } else {
-      totalPrice += price;
-      slotList.add(list[index]);
+      selectedTime = int.parse(temp);
     }
+    log(selectedTime.toString());
+    var selectedDate = DateFormat.d().format(selectedValue);
+
+    if (selectedDate == DateTime.now().day.toString()) {
+      if (selectedTime > dateTimeNow) {
+        if (slotList.contains(list[index])) {
+          totalPrice -= price;
+          slotList.remove(list[index]);
+        } else {
+          totalPrice += price;
+          slotList.add(list[index]);
+        }
+      } else {
+        log('time unavailable');
+        Get.snackbar("", '',
+            messageText: Center(
+              child: Text(
+                "This slot is expired",
+                style: GoogleFonts.ptSerif(color: white),
+              ),
+            ),
+            backgroundColor: Colors.lightBlue.withOpacity(0.5));
+      }
+    } else {
+      if (slotList.contains(list[index])) {
+        totalPrice -= price;
+        slotList.remove(list[index]);
+      } else {
+        totalPrice += price;
+        slotList.add(list[index]);
+      }
+    }
+
     update();
   }
 
-//   dateAndTimeNow({required String value,required String heading}) {
-//     final now = DateTime.now().hour;
-//  int dateTime = int.parse(value.trim().split(":").first);
+  bool isAvailableCheckFunction({
+    required String item,
+    required String heading,
+  }) {
+    var temp = item.trim();
+    var splittedtime = temp.split(':').first;
+    var parsedTime = int.parse(splittedtime);
+    var parseddate = DateFormat.d().format(selectedValue);
+    var finalTime = 0;
+    if (heading != 'morning') {
+      finalTime = parsedTime + 12;
+    } else {
+      finalTime = parsedTime;
+    }
+    return DateTime.now().hour >= finalTime &&
+        parseddate == DateTime.now().day.toString();
+  }
 
-//  if (heading == "Morning"){
-//   dateTime;
-//  }else{
-//   dateTime+12;
-//  }
-
-//  if(now >=dateTime){
-//  black;
-//  }else if(slotList.contains(value)){
-//   blueGrey;
-
-//  }else{
-//   green;
-
-//  }
-  dateAndTimenow(int index,List list) {
-    final now = DateTime.now().hour;
-    // int dateTime = int.parse(slotList[index].trim().split(":").first);
-    
-    
-for (var i = 0; i < allTime.length; i++) {
-    unconverted.add(allTime[i]);
-    log('$unconverted ---------unconverted list');
+  void onDateChangeFunction(date) {
+    selectedValue = date;
+    update();
   }
-  for(int i =unconverted[0];i<unconverted[1];i++){
-  unconvertedMorning.add(i);
-  log("$unconvertedMorning --unconverted morning list");
-  }
-  for(int i =unconverted[2];i<unconverted[3];i++){
-  unconvertedAfterNoon.add(i);
-  log("$unconvertedAfterNoon --unconverted afternoon list");
-  }
-  for(int i =unconverted[4];i<unconverted[5];i++){
-  unconvertedEvening.add(i);
-  log("$unconvertedEvening --unconverted evening list");
-  }
-  if(unconvertedMorning[index]<=now ||unconvertedAfterNoon[index]<now|| unconvertedEvening[index]<now){
-    return red;
-  }
- else if(slotList.contains(list[index])){
-    return blueGrey;
-  }else{
-    return green;
-  }
-}
 }

@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import '../../constant/color.dart';
 
 class ChoiceContainer extends StatelessWidget {
-  const ChoiceContainer({Key? key, required this.time, required this.contains})
-      : super(key: key);
+  const ChoiceContainer({
+    Key? key,
+    required this.time,
+    required this.contains,
+    required this.isAvailable,
+  }) : super(key: key);
   final String time;
   final bool contains;
+  final bool isAvailable;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,10 +19,14 @@ class ChoiceContainer extends StatelessWidget {
         height: MediaQuery.of(context).size.height / 14,
         width: MediaQuery.of(context).size.width / 3.5,
         decoration: BoxDecoration(
-          color: contains ? blueGrey : green,
+          color: contains
+              ? blueGrey
+              : isAvailable
+                  ? red.withOpacity(0.1)
+                  : green,
           borderRadius: BorderRadius.circular(20),
         ),
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 30),
         child: Center(
           child: Text(
             time,
