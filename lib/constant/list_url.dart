@@ -4,7 +4,9 @@ class Endpoints{
   static const String signupEmail = "/account/signup-email";
   static const String emailOtpVerify = "/account/verify-email-otp";
   static const String nearestTurf = "/user/nearest-turf/";
-  static const String  allTurf = "/user/all-turf";
-  static const String wishList = "/user/get-whishlist/{id}";
+  static const String allTurf = "/user/all-turf";
+  static const String bookingAdd = "/account/add-booking";
+  static const String getBooking= "/account/get-booking/";
+
 
 }

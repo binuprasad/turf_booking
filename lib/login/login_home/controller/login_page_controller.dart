@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/service/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,11 +25,11 @@ class LoginPageController extends GetxController {
     if (response!.error == true) {
       Get.snackbar('', response.error.toString(),
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.limeAccent);
+          backgroundColor: green.withOpacity(0.2));
     } else {
       Get.snackbar('', "Successfully logined",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.limeAccent);
+          backgroundColor: green.withOpacity(0.2));
     }
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(

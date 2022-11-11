@@ -43,7 +43,7 @@ dependencies:
   getwidget: ^3.0.1
   google_fonts: ^3.0.1
   intl: ^0.17.0
-  lottie: ^1.4.3
+  lottie: ^2.0.0
   page_transition: ^2.0.9
   pinput: ^2.2.16
   shaky_animated_listview: ^0.0.5

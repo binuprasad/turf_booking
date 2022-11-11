@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,8 +11,9 @@ import '../widgets/botton_navigation_container.dart';
 import '../widgets/choice_container.dart';
 
 class BookNow extends StatelessWidget {
-  BookNow({Key? key, required this.data}) : super(key: key);
+  BookNow({Key? key, required this.data, }) : super(key: key);
   final Datum data;
+  
   final booknowController = Get.put(BookNowController());
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,9 @@ class BookNow extends StatelessWidget {
                                 selectionColor: black,
                                 selectedTextColor: white,
                                 onDateChange: (date) {
-                                 booknowController.onDateChangeFunction(date);
+                                  booknowController.onDateChangeFunction(date);
+                                  booknowController.slotList.clear();
+                                  booknowController.totalPrice.value = 0;
                                 },
                               ),
                             ),
@@ -119,10 +120,9 @@ class BookNow extends StatelessWidget {
                                   contains: booknowController.slotList.contains(
                                     booknowController.morning[index],
                                   ),
-                                  isAvailable: booknowController
-                                      .isAvailableCheckFunction(
-                                          item:
-                                              booknowController.morning[index],
+                                  isAvailable:
+                                      booknowController.isAvailableCheckFunction(
+                                          item: booknowController.morning[index],
                                           heading: 'morning'),
                                 ),
                               ),
@@ -130,8 +130,7 @@ class BookNow extends StatelessWidget {
                           ),
                         ),
                         ListTile(
-                          leading:
-                              const BookingTimeHeading(heading: 'Afternoon'),
+                          leading: const BookingTimeHeading(heading: 'Afternoon'),
                           trailing: PriceText(
                             data: data,
                             text: '₹${data.turfPrice!.afternoonPrice!}',
@@ -154,10 +153,10 @@ class BookNow extends StatelessWidget {
                                   time: '${booknowController.afterNoon[index]}',
                                   contains: booknowController.slotList.contains(
                                       booknowController.afterNoon[index]),
-                                  isAvailable: booknowController
-                                      .isAvailableCheckFunction(
-                                          item: booknowController
-                                              .afterNoon[index],
+                                  isAvailable:
+                                      booknowController.isAvailableCheckFunction(
+                                          item:
+                                              booknowController.afterNoon[index],
                                           heading: 'afternoon'),
                                 ),
                               ),
@@ -185,13 +184,12 @@ class BookNow extends StatelessWidget {
                                   );
                                 },
                                 child: ChoiceContainer(
-                                  contains: booknowController.slotList.contains(
-                                      booknowController.evening[index]),
+                                  contains: booknowController.slotList
+                                      .contains(booknowController.evening[index]),
                                   time: '${booknowController.evening[index]}',
-                                  isAvailable: booknowController
-                                      .isAvailableCheckFunction(
-                                          item:
-                                              booknowController.evening[index],
+                                  isAvailable:
+                                      booknowController.isAvailableCheckFunction(
+                                          item: booknowController.evening[index],
                                           heading: 'evening'),
                                 ),
                               ),
@@ -214,7 +212,8 @@ class BookNow extends StatelessWidget {
           children: [
             Obx(
               () => GestureDetector(
-                onTap: () {},
+                onTap: () {
+                },
                 child: BottomNavigationContainer(
                   text: 'TotalPrice:${booknowController.totalPrice}',
                   backgrounColor: green,

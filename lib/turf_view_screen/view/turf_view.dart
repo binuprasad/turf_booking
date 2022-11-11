@@ -201,7 +201,10 @@ class TurfViewScreen extends StatelessWidget {
             Get.to(() => BookNow(data: data));
             bookNowController.convert24ToNormalTime(data);
             bookNowController.splitTime();
-
+          
+            // log('${data.}')
+            bookNowController.getBookings(data.id!.trim());
+            // bookNowController.addBooking(data);
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
           child: const Text(

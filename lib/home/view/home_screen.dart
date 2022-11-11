@@ -212,10 +212,10 @@ class HomeScreen extends StatelessWidget {
                                                   style: GoogleFonts.ptSerif(),
                                                 ),
                                                 datas.turfType!.turfFives!
-                                                    ? const Text('5s')
+                                                    ?  Text('5s',style: GoogleFonts.notoSerif(),)
                                                     : const Text(''),
                                                 datas.turfType!.turfSevens!
-                                                    ? const Text('&7s')
+                                                    ?  Text('&7s',style: GoogleFonts.notoSerif(),)
                                                     : const Text('')
                                               ],
                                             ),

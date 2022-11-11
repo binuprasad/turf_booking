@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:movie_tickets/location_controller/location_controller.dart';
 import 'package:movie_tickets/model/home_model.dart';
@@ -14,7 +13,7 @@ class HomeController extends GetxController {
     await allTheTurfs();
     super.onInit();
   }
- 
+
   var currentIndex = 0.0.obs;
   List<Datum> nearby = [];
   List<Datum> allTurfList = [];
@@ -32,30 +31,21 @@ class HomeController extends GetxController {
 
     final HomeResponse? response =
         await HomeServices().nearestTurf(location: location, token: token!);
-    log('message');
-    log('before add $nearby'.toString());
     if (response != null || response!.status == true) {
-      log('after add222 $nearby'.toString());
       nearby.clear();
       nearby.addAll(response.data!);
-      log('after add $nearby'.toString());
     }
     isLoading(false);
     update();
   }
 
   Future allTheTurfs() async {
-    
     SharedPreferences prf = await SharedPreferences.getInstance();
     final token = prf.getString('token');
     final HomeResponse? response = await HomeServices().allTurfs(token: token!);
-    log('entered');
     if (response != null || response!.status == true) {
-      log('entere into condition');
       allTurfList.clear();
-      log('before legth${allTurfList.length}');
       allTurfList.addAll(response.data!);
-      log('legth of allturf${allTurfList.length}');
     }
     update();
   }

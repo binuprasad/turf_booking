@@ -6,8 +6,11 @@ class TurfScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
-      child: Text('GROUND',style: GoogleFonts.akayaKanadaka(fontSize: 70),),
+    return Center(
+      child: Text(
+        'GROUND',
+        style: GoogleFonts.akayaKanadaka(fontSize: 70),
+      ),
     );
   }
 }

@@ -1,11 +1,12 @@
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_tickets/constant/color.dart';
+import 'package:movie_tickets/model/booking_model.dart';
 import 'package:movie_tickets/model/home_model.dart';
+import 'package:movie_tickets/service/booking_service.dart';
 
 class BookNowController extends GetxController {
   DateTime selectedValue = DateTime.now();
@@ -17,6 +18,8 @@ class BookNowController extends GetxController {
   List allTime = [];
   List convertedList = [];
   List slotList = [];
+  List bookingslots = [];
+  Map<String,List<int>> bookingslotsMap={};
 
   convert24ToNormalTime(Datum data) {
     allTime.clear();
@@ -131,4 +134,43 @@ class BookNowController extends GetxController {
     selectedValue = date;
     update();
   }
+
+  void getBookings(String id) async {
+    log('entered');
+    log(id);
+    final Bookingresponse? response =
+        await BookingService().getBooking(id: id);
+    if (response != null) {
+      bookingslots.clear();
+       bookingslots.addAll(response.data[0].timeSlot);
+      for (var element in response.data) {
+      bookingslotsMap[element.bookingDate] = element.timeSlot;
+    }
+    
+    log('$bookingslotsMap -----------booking slots map----------');
+
+    log('$bookingslots -----------booking slots list');
+      log('${response.toString()} --------woo');
+      log('${response.data.toString()} --------woo');
+    } else {
+      log('response.data is null');
+    }
+
+
+    void checkingSlotIsBooked(){
+      // if()
+    }
+  }
+
+  // void addBooking(Datum data) async {
+  //   String date = DateTime(2022).toString();
+  //   final Bookingresponse? response = await BookingService()
+  //       .addBooking(date: date, id: data.id!, slot: slotList);
+  //   if (response != null) {
+  //   log(  '${response.data}');
+      
+  //   } else {
+  //     log('no data is found');
+  //   }
+  // }
 }

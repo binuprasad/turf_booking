@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:movie_tickets/search/controller/search_controller.dart';
 import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
-import '../../constant/constant_widget.dart';
 
 class SearchScreen extends GetView<SearchController> {
   SearchScreen({Key? key}) : super(key: key);
@@ -125,72 +126,56 @@ class SearchScreen extends GetView<SearchController> {
                                               ),
                                             ),
                                           ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                14,
+                                          ),
                                           Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        horizontal: 32,
-                                                        vertical: 10),
+                                                        horizontal: 0,
+                                                        vertical: 30),
                                                 child: Text(
                                                   datas.turfName.toString(),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: const TextStyle(
                                                       fontSize: 19,
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.white),
+                                                      color: green),
                                                 ),
                                               ),
                                               Row(
                                                 children: [
-                                                  const Icon(Icons.location_on),
-                                                  Text(datas.turfPlace
-                                                      .toString()),
-                                                ],
-                                              ),
-                                              ht10,
-                                              Row(
-                                                children: [
-                                                  const Text('Turftype : '),
-                                                  datas.turfType!.turfFives!
-                                                      ? const Text('5s')
-                                                      : const Text(''),
-                                                  datas.turfType!.turfSevens!
-                                                      ? const Text('&7s')
-                                                      : const Text('')
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 10),
-                                                    child: Row(
-                                                      children: [
-                                                        const Icon(
-                                                          Icons.star,
-                                                          color: Colors.yellow,
-                                                        ),
-                                                        Text(datas.turfInfo!
-                                                            .turfRating!
-                                                            .toString())
-                                                      ],
-                                                    ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.star,
+                                                        color: Colors.yellow,
+                                                      ),
+                                                      Text(datas
+                                                          .turfInfo!.turfRating!
+                                                          .toString())
+                                                    ],
                                                   ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 10),
-                                                    child: Row(
-                                                      children: [
-                                                        IconButton(
-                                                          onPressed: () {},
-                                                          icon: const Icon(Icons
-                                                              .favorite_outline),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                  ),
+                                                  IconButton(
+                                                    onPressed: () {},
+                                                    icon: const Icon(
+                                                        Icons.favorite_outline),
                                                   )
                                                 ],
                                               )
@@ -204,9 +189,9 @@ class SearchScreen extends GetView<SearchController> {
                               },
                             ),
                           )
-                        : const Text(
-                            'No results found',
-                            style: TextStyle(fontSize: 24),
+                        : SingleChildScrollView(
+                            child:
+                                Lottie.asset('assets/image/100123-search.json'),
                           ),
                   ),
                 ),

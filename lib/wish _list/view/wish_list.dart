@@ -18,14 +18,7 @@ class WishList extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                child: Text(
-                  "Wish List",
-                  style: TextStyle(
-                      fontSize: 20, color: white, fontWeight: FontWeight.bold),
-                ),
-              ),
+              
               ht20,
               GridView.count(
                   shrinkWrap: true,
@@ -49,10 +42,11 @@ class WishList extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {},
-                              icon: const CircleAvatar(
-                                backgroundColor: white,
+                              icon:  const CircleAvatar(
+                                backgroundColor: Colors.pinkAccent,
                                 child: Icon(
                                   Icons.favorite_outline_outlined,
+                                  color: white,
                                 ),
                               ),
                             ),
