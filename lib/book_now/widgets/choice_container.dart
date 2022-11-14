@@ -7,10 +7,12 @@ class ChoiceContainer extends StatelessWidget {
     required this.time,
     required this.contains,
     required this.isAvailable,
+    required this.isBooked,
   }) : super(key: key);
   final String time;
   final bool contains;
   final bool isAvailable;
+  final bool isBooked;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,19 +24,29 @@ class ChoiceContainer extends StatelessWidget {
           color: contains
               ? blueGrey
               : isAvailable
-                  ? red.withOpacity(0.1)
+                  ? isBooked
+                      ? red
+                      : green.withOpacity(0.3)
                   : green,
           borderRadius: BorderRadius.circular(20),
         ),
-        duration: const Duration(milliseconds: 30),
+        duration: const Duration(milliseconds: 300),
         child: Center(
           child: Text(
             time,
             style: TextStyle(
-                fontWeight: FontWeight.w800, color: contains ? white : black),
+                fontWeight: FontWeight.w800,
+                color: isBooked || contains ? white : black),
           ),
         ),
       ),
     );
   }
 }
+// isBooked
+//               ? red
+//               : contains
+//                   ? blueGrey
+//                   : isAvailable
+//                       ? green.withOpacity(0.1)
+//                       : green,

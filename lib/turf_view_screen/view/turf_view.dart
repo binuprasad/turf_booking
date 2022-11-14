@@ -4,7 +4,6 @@ import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_tickets/book_now/controller/booknow_controller.dart';
-import 'package:movie_tickets/book_now/view/book_now.dart';
 import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:movie_tickets/turf_view_screen/widgets/amenties_text.dart';
@@ -142,9 +141,10 @@ class TurfViewScreen extends StatelessWidget {
                           Text(
                             'Amenities',
                             style: GoogleFonts.notoSerif(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: green),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: green,
+                            ),
                           ),
                           ht5,
                           Row(
@@ -195,16 +195,8 @@ class TurfViewScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height / 15,
         width: MediaQuery.of(context).size.width / 1.3,
         child: ElevatedButton(
-          onPressed: () {
-            bookNowController.totalPrice.value = 0;
-            bookNowController.slotList.clear();
-            Get.to(() => BookNow(data: data));
-            bookNowController.convert24ToNormalTime(data);
-            bookNowController.splitTime();
-          
-            // log('${data.}')
-            bookNowController.getBookings(data.id!.trim());
-            // bookNowController.addBooking(data);
+          onPressed: () async {
+            await bookNowController.bookNowOntap(data);
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
           child: const Text(

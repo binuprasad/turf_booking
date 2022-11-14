@@ -1,26 +1,29 @@
 import 'dart:developer';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:movie_tickets/constant/color.dart';
+import 'package:movie_tickets/book_now/view/book_now.dart';
 import 'package:movie_tickets/model/booking_model.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:movie_tickets/service/booking_service.dart';
+import '../../model/add_booking_model.dart';
 
 class BookNowController extends GetxController {
   DateTime selectedValue = DateTime.now();
-  bool selected = false;
   RxInt totalPrice = 0.obs;
-  List morning = [];
-  List afterNoon = [];
-  List evening = [];
-  List allTime = [];
-  List convertedList = [];
-  List slotList = [];
-  List bookingslots = [];
-  Map<String,List<int>> bookingslotsMap={};
+  var finalTime = 0;
+  late String parseddate;
+  String selectedDate = '';
+  List<String> morning = [];
+  List<String> afterNoon = [];
+  List<String> evening = [];
+  List<dynamic> allTime = [];
+  List<dynamic> convertedList = [];
+  List<String> newSlotList = [];
+  List<int> sendToBackendlist = [];
 
+  List alreadyBookingslots = [];
+  Map<String, List<int>> bookingslotsMap = {};
+//-----------------------------------------------------------convert 24 hrs to 12 hrs
   convert24ToNormalTime(Datum data) {
     allTime.clear();
     allTime.addAll([
@@ -43,6 +46,7 @@ class BookNowController extends GetxController {
     log('1st $convertedList');
   }
 
+//------------------------------------------------------------------------split time
   splitTime() {
     morning.clear();
     evening.clear();
@@ -60,117 +64,139 @@ class BookNowController extends GetxController {
     }
   }
 
-  slotBooking({
+//----------------------------------------------------------------------------slot booking
+
+  void selectingSlot({
     required int index,
-    required list,
+    required List<String> list,
     required int price,
     required String key,
   }) {
-    String temp = list[index].trim().split(":").first;
-    int selectedTime = 0;
-    int dateTimeNow = DateTime.now().hour;
-    // log('$dateTimeNow ----date time. now');
-    // log('$selectedTime ----ontap time');
-    if (key != "morning") {
-      selectedTime = int.parse(temp) + 12;
-    } else {
-      selectedTime = int.parse(temp);
-    }
-    log(selectedTime.toString());
     var selectedDate = DateFormat.d().format(selectedValue);
+    var nowDate = DateTime.now().day.toString();
 
-    if (selectedDate == DateTime.now().day.toString()) {
-      if (selectedTime > dateTimeNow) {
-        if (slotList.contains(list[index])) {
-          totalPrice -= price;
-          slotList.remove(list[index]);
-        } else {
-          totalPrice += price;
-          slotList.add(list[index]);
-        }
-      } else {
-        log('time unavailable');
-        Get.snackbar("", '',
-            messageText: Center(
-              child: Text(
-                "This slot is expired",
-                style: GoogleFonts.ptSerif(color: white),
-              ),
-            ),
-            backgroundColor: Colors.lightBlue.withOpacity(0.5));
-      }
+    if (key != 'morning') {
+      finalTime = int.parse(list[index].trim().split(':').first) + 12;
     } else {
-      if (slotList.contains(list[index])) {
-        totalPrice -= price;
-        slotList.remove(list[index]);
-      } else {
-        totalPrice += price;
-        slotList.add(list[index]);
-      }
+      finalTime = int.parse(list[index].trim().split(':').first);
     }
 
+    if (selectedDate == nowDate) {
+      if (finalTime > DateTime.now().hour) {
+        checkAndAddPrice(list, index, price, finalTime);
+      }
+    } else {
+      checkAndAddPrice(list, index, price, finalTime);
+    }
+    // log(sendToBackendlist.toString());
     update();
   }
 
+//----------------------------------------------------------------------------
+  void checkAndAddPrice(
+    List<String> list,
+    int index,
+    int price,
+    int finalTime,
+  ) {
+    if (newSlotList.contains(list[index]) ||
+        alreadyBookingslots.contains(finalTime)) {
+      if (!alreadyBookingslots.contains(finalTime)) {
+        totalPrice -= price;
+      }
+
+      sendToBackendlist.remove(finalTime);
+      newSlotList.remove(list[index]);
+    } else {
+      totalPrice += price;
+      sendToBackendlist.add(finalTime);
+      newSlotList.add(list[index]);
+    }
+  }
+
+//-----------------------------------------------------------------------------is available check function
   bool isAvailableCheckFunction({
     required String item,
     required String heading,
   }) {
-    var temp = item.trim();
-    var splittedtime = temp.split(':').first;
-    var parsedTime = int.parse(splittedtime);
+    int parsedTime = int.parse(item.trim().split(':').first);
     var parseddate = DateFormat.d().format(selectedValue);
-    var finalTime = 0;
+    log('$parseddate ---------parsedate');
+    finalTime = 0;
     if (heading != 'morning') {
       finalTime = parsedTime + 12;
     } else {
       finalTime = parsedTime;
     }
-    return DateTime.now().hour >= finalTime &&
-        parseddate == DateTime.now().day.toString();
+    return (DateTime.now().hour >= finalTime &&
+            parseddate == DateTime.now().day.toString() ||
+        alreadyBookingslots.contains(finalTime));
   }
 
-  void onDateChangeFunction(date) {
+//--------------------------------------------------------------------------------on date change function
+  void onDateChangeFunction(DateTime date) {
     selectedValue = date;
+    newSlotList.clear();
+    sendToBackendlist.clear();
+    totalPrice.value = 0;
+    alreadyBookingslots.clear();
+    addToBookingSlots();
     update();
   }
 
-  void getBookings(String id) async {
-    log('entered');
-    log(id);
-    final Bookingresponse? response =
-        await BookingService().getBooking(id: id);
+//---------------------------------------------------------------------book now on tap function
+  Future<void> bookNowOntap(data) async {
+    totalPrice.value = 0;
+
+    selectedValue = DateTime.now();
+    newSlotList.clear();
+    convert24ToNormalTime(data);
+    splitTime();
+    await getBookings(data.id!.trim());
+    alreadyBookingslots.clear();
+    await addToBookingSlots();
+    sendToBackendlist.clear();
+    Get.to(() => BookNow(data: data));
+  }
+
+//-------------------------------------------------------------------------------------get booked turf function
+  Future<void> getBookings(String id) async {
+    log(" turf id $id");
+    final BookResponse? response = await BookingService().getBooking(id: id);
+   
     if (response != null) {
-      bookingslots.clear();
-       bookingslots.addAll(response.data[0].timeSlot);
+       log('respnse in get booking ${response.data}');
       for (var element in response.data) {
-      bookingslotsMap[element.bookingDate] = element.timeSlot;
-    }
-    
-    log('$bookingslotsMap -----------booking slots map----------');
-
-    log('$bookingslots -----------booking slots list');
-      log('${response.toString()} --------woo');
-      log('${response.data.toString()} --------woo');
+        bookingslotsMap[element.bookingDate] = element.timeSlot;
+        log('$bookingslotsMap  -----------booking map');
+      }
     } else {
-      log('response.data is null');
-    }
-
-
-    void checkingSlotIsBooked(){
-      // if()
+      log('response . data is null');
+      // bookingslotsMap['11/12/2022'] = [15, 22, 5, 10];
     }
   }
 
-  // void addBooking(Datum data) async {
-  //   String date = DateTime(2022).toString();
-  //   final Bookingresponse? response = await BookingService()
-  //       .addBooking(date: date, id: data.id!, slot: slotList);
-  //   if (response != null) {
-  //   log(  '${response.data}');
-      
-  //   } else {
-  //     log('no data is found');
-  //   }
-  // }
+//--------------------------------------------------------add bookingslot map to already booked slots list
+  addToBookingSlots() {
+    selectedDate = DateFormat.yMd().format(selectedValue);
+    alreadyBookingslots.clear();
+    if (bookingslotsMap.containsKey(selectedDate)) {
+      alreadyBookingslots.addAll(bookingslotsMap[selectedDate]!);
+      log('bookig slots sfter adding $alreadyBookingslots');
+    }
+    log('booking slot map $bookingslotsMap');
+    log('selected Date $selectedDate');
+    log(alreadyBookingslots.toString());
+  }
+
+//-------------------------------------------------------------------book turf function
+  Future<void> addBooking(String id) async {
+    AddBookingRequest model = AddBookingRequest(
+        bookingDate: parseddate, turfId: id, timeSlot: sendToBackendlist);
+    final bool? response = await BookingService().addBooking(model: model);
+    if (response != null) {
+    } else {
+      log('no data is found');
+    }
+  }
 }

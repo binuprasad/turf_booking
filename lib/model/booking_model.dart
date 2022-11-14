@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-Bookingresponse bookResponseFromJson(String str) =>
-    Bookingresponse.fromJson(json.decode(str));
+BookResponse bookResponseFromJson(String str) =>
+    BookResponse.fromJson(json.decode(str));
 
-class Bookingresponse {
-  Bookingresponse({
+class BookResponse {
+  BookResponse({
     required this.status,
     required this.data,
   });
@@ -12,7 +12,7 @@ class Bookingresponse {
   bool status;
   List<BookingDatum> data;
 
-  factory Bookingresponse.fromJson(Map<String, dynamic> json) => Bookingresponse(
+  factory BookResponse.fromJson(Map<String, dynamic> json) => BookResponse(
         status: json["status"],
         data: List<BookingDatum>.from(
             json["data"].map((x) => BookingDatum.fromJson(x))),

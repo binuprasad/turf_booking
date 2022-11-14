@@ -11,9 +11,12 @@ import '../widgets/botton_navigation_container.dart';
 import '../widgets/choice_container.dart';
 
 class BookNow extends StatelessWidget {
-  BookNow({Key? key, required this.data, }) : super(key: key);
+  BookNow({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
   final Datum data;
-  
+
   final booknowController = Get.put(BookNowController());
   @override
   Widget build(BuildContext context) {
@@ -74,8 +77,6 @@ class BookNow extends StatelessWidget {
                                 selectedTextColor: white,
                                 onDateChange: (date) {
                                   booknowController.onDateChangeFunction(date);
-                                  booknowController.slotList.clear();
-                                  booknowController.totalPrice.value = 0;
                                 },
                               ),
                             ),
@@ -103,46 +104,54 @@ class BookNow extends StatelessWidget {
                         ),
                         ht5,
                         GetBuilder<BookNowController>(
-                          builder: (controller) => Wrap(
-                            children: List.generate(
-                              booknowController.morning.length,
-                              (index) => GestureDetector(
-                                onTap: () {
-                                  booknowController.slotBooking(
-                                    index: index,
-                                    list: booknowController.morning,
-                                    price: data.turfPrice!.morningPrice!,
-                                    key: 'morning',
-                                  );
-                                },
-                                child: ChoiceContainer(
-                                  time: '${booknowController.morning[index]}',
-                                  contains: booknowController.slotList.contains(
-                                    booknowController.morning[index],
+                          builder: (controller) {
+                            return Wrap(
+                              children: List.generate(
+                                booknowController.morning.length,
+                                (index) => GestureDetector(
+                                  onTap: () {
+                                    booknowController.selectingSlot(
+                                      index: index,
+                                      list: booknowController.morning,
+                                      price: data.turfPrice!.morningPrice!,
+                                      key: 'morning',
+                                    );
+                                  },
+                                  child: ChoiceContainer(
+                                    time: booknowController.morning[index],
+                                    contains:
+                                        booknowController.newSlotList.contains(
+                                      booknowController.morning[index],
+                                    ),
+                                    isAvailable: booknowController
+                                        .isAvailableCheckFunction(
+                                      item: booknowController.morning[index],
+                                      heading: 'morning',
+                                    ),
+                                    isBooked: booknowController
+                                        .alreadyBookingslots
+                                        .contains(booknowController.finalTime),
                                   ),
-                                  isAvailable:
-                                      booknowController.isAvailableCheckFunction(
-                                          item: booknowController.morning[index],
-                                          heading: 'morning'),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                         ListTile(
-                          leading: const BookingTimeHeading(heading: 'Afternoon'),
+                          leading:
+                              const BookingTimeHeading(heading: 'Afternoon'),
                           trailing: PriceText(
                             data: data,
                             text: '₹${data.turfPrice!.afternoonPrice!}',
                           ),
                         ),
-                        GetBuilder<BookNowController>(
-                          builder: (controller) => Wrap(
+                        GetBuilder<BookNowController>(builder: (controller) {
+                          return Wrap(
                             children: List.generate(
                               booknowController.afterNoon.length,
                               (index) => GestureDetector(
                                 onTap: () {
-                                  booknowController.slotBooking(
+                                  booknowController.selectingSlot(
                                     index: index,
                                     list: booknowController.afterNoon,
                                     price: data.turfPrice!.afternoonPrice!,
@@ -150,19 +159,22 @@ class BookNow extends StatelessWidget {
                                   );
                                 },
                                 child: ChoiceContainer(
-                                  time: '${booknowController.afterNoon[index]}',
-                                  contains: booknowController.slotList.contains(
-                                      booknowController.afterNoon[index]),
-                                  isAvailable:
-                                      booknowController.isAvailableCheckFunction(
-                                          item:
-                                              booknowController.afterNoon[index],
-                                          heading: 'afternoon'),
-                                ),
+                                    time: booknowController.afterNoon[index],
+                                    contains: booknowController.newSlotList
+                                        .contains(
+                                            booknowController.afterNoon[index]),
+                                    isAvailable: booknowController
+                                        .isAvailableCheckFunction(
+                                      item: booknowController.afterNoon[index],
+                                      heading: 'afternoon',
+                                    ),
+                                    isBooked: booknowController
+                                        .alreadyBookingslots
+                                        .contains(booknowController.finalTime)),
                               ),
                             ),
-                          ),
-                        ),
+                          );
+                        }),
                         ListTile(
                           leading: const BookingTimeHeading(heading: 'Evening'),
                           trailing: PriceText(
@@ -171,30 +183,37 @@ class BookNow extends StatelessWidget {
                           ),
                         ),
                         GetBuilder<BookNowController>(
-                          builder: (controller) => Wrap(
-                            children: List.generate(
-                              booknowController.evening.length,
-                              (index) => GestureDetector(
-                                onTap: () {
-                                  booknowController.slotBooking(
-                                    index: index,
-                                    list: booknowController.evening,
-                                    price: data.turfPrice!.eveningPrice!,
-                                    key: 'evening',
-                                  );
-                                },
-                                child: ChoiceContainer(
-                                  contains: booknowController.slotList
-                                      .contains(booknowController.evening[index]),
-                                  time: '${booknowController.evening[index]}',
-                                  isAvailable:
-                                      booknowController.isAvailableCheckFunction(
-                                          item: booknowController.evening[index],
-                                          heading: 'evening'),
+                          builder: (controller) {
+                            return Wrap(
+                              children: List.generate(
+                                booknowController.evening.length,
+                                (index) => GestureDetector(
+                                  onTap: () {
+                                    booknowController.selectingSlot(
+                                      index: index,
+                                      list: booknowController.evening,
+                                      price: data.turfPrice!.eveningPrice!,
+                                      key: 'evening',
+                                    );
+                                  },
+                                  child: ChoiceContainer(
+                                      contains: booknowController.newSlotList
+                                          .contains(
+                                              booknowController.evening[index]),
+                                      time: booknowController.evening[index],
+                                      isAvailable: booknowController
+                                          .isAvailableCheckFunction(
+                                        item: booknowController.evening[index],
+                                        heading: 'evening',
+                                      ),
+                                      isBooked: booknowController
+                                          .alreadyBookingslots
+                                          .contains(
+                                              booknowController.finalTime)),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -212,8 +231,7 @@ class BookNow extends StatelessWidget {
           children: [
             Obx(
               () => GestureDetector(
-                onTap: () {
-                },
+                onTap: () {},
                 child: BottomNavigationContainer(
                   text: 'TotalPrice:${booknowController.totalPrice}',
                   backgrounColor: green,
@@ -221,10 +239,15 @@ class BookNow extends StatelessWidget {
                 ),
               ),
             ),
-            const BottomNavigationContainer(
-              text: 'Book',
-              backgrounColor: white,
-              textColor: green,
+            GestureDetector(
+              onTap: () {
+                booknowController.addBooking(data.id!);
+              },
+              child: const BottomNavigationContainer(
+                text: 'Book',
+                backgrounColor: white,
+                textColor: green,
+              ),
             )
           ],
         ),
