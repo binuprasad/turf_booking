@@ -7,6 +7,8 @@ class Endpoints{
   static const String allTurf = "/user/all-turf";
   static const String bookingAdd = '/account/add-booking';
   static const String getBooking= '/account/get-booking/';
-
+  static const String addWishList = '/user/add-wishlist';
+  static const String getWishList = '/user/get-wishlist/';
+  static const String removeWishList = '/user/delete-wishlist/';
 
 }

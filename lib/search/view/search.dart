@@ -140,15 +140,15 @@ class SearchScreen extends GetView<SearchController> {
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 0,
-                                                        vertical: 27),
+                                                        vertical: 20),
                                                 child: SizedBox(
                                                   width: 150,
+                                                  height: 30,
                                                   child: FittedBox(
                                                     child: Text(
                                                       datas.turfName.toString(),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: const TextStyle(
+                                                     
+                                                      style: GoogleFonts.ptSerif(
                                                           fontSize: 19,
                                                           fontWeight:
                                                               FontWeight.bold,

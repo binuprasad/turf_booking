@@ -236,11 +236,11 @@ class BookNowController extends GetxController {
   void openRazorpay() {
     var options = {
       'key': 'rzp_test_HGhudhNLE4XMyi',
-      'amount': totalPrice * 100, //in the smallest currency sub-unit.
+      'amount': totalPrice * 100, 
       'name': 'Acme Corp.',
-      // 'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
+  
       'description': 'Fine T-Shirt',
-      'timeout': 60, // in seconds
+      'timeout': 60, 
       'prefill': {'contact': '9123456789', 'email': 'gaurav.kumar@example.com'}
     };
 

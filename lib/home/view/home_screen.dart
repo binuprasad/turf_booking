@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glass_kit/glass_kit.dart';
@@ -14,6 +13,7 @@ import 'package:movie_tickets/location_controller/location_controller.dart';
 import 'package:movie_tickets/auth/login_home/view/login_page.dart';
 import 'package:movie_tickets/search/view/search.dart';
 import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
+import 'package:movie_tickets/wish%20_list/widgets/favourite_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -120,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                                   image: data.turfLogo.toString(),
                                   turfName: data.turfName.toString(),
                                   starRating:
-                                      data.turfInfo!.turfRating!.toString(),
+                                      data.turfInfo!.turfRating!.toString(), data: data,
                                 ),
                               );
                             }
@@ -261,17 +261,13 @@ class HomeScreen extends StatelessWidget {
                                                       .toString())
                                                 ],
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    6,
-                                              ),
-                                              IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(
-                                                    Icons.favorite_outline),
-                                              )
+                                              // SizedBox(
+                                              //   width: MediaQuery.of(context)
+                                              //           .size
+                                              //           .width /
+                                              //       6,
+                                              // ),
+                                              FavTurfIconButton(data: datas),
                                             ],
                                           )
                                         ],

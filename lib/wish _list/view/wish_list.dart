@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 import 'package:movie_tickets/constant/color.dart';
 import 'package:movie_tickets/constant/constant_widget.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
+import 'package:movie_tickets/wish%20_list/controller/wish_list_controller.dart';
+import 'package:movie_tickets/wish%20_list/widgets/favourite_button.dart';
 import 'package:shaky_animated_listview/scroll_animator.dart';
 
 class WishList extends StatelessWidget {
-   WishList({Key? key}) : super(key: key);
+  WishList({
+    Key? key,
+  }) : super(key: key);
   final homeScreencontroller = Get.put(HomeController());
-
+  final favouriteController = Get.put(WishListController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,14 +22,14 @@ class WishList extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              
               ht20,
               GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   children: List.generate(
-                    homeScreencontroller.allTurfList.length,
+                     favouriteController
+                                            .favaTurf.length,
                     (i) => GridAnimatorWidget(
                       child: Padding(
                         padding: const EdgeInsets.all(4),
@@ -34,22 +38,26 @@ class WishList extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
-                                  image:  DecorationImage(
+                                  image: DecorationImage(
                                       image: NetworkImage(
-                                        homeScreencontroller.allTurfList[i].turfLogo!,
+                                        favouriteController
+                                            .favaTurf[i].turfLogo!,
                                       ),
                                       fit: BoxFit.fill)),
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon:  const CircleAvatar(
-                                backgroundColor: Colors.pinkAccent,
-                                child: Icon(
-                                  Icons.favorite_outline_outlined,
-                                  color: white,
-                                ),
-                              ),
-                            ),
+                            FavTurfIconButton(
+                                data:  favouriteController
+                                            .favaTurf[i]),
+                            // IconButton(
+                            //   onPressed: () {},
+                            //   icon:  const CircleAvatar(
+                            //     backgroundColor: Colors.pinkAccent,
+                            //     child: Icon(
+                            //       Icons.favorite_outline_outlined,
+                            //       color: white,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

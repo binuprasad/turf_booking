@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
+import 'package:movie_tickets/model/home_model.dart';
+import 'package:movie_tickets/wish%20_list/widgets/favourite_button.dart';
 
 class CustomCard2 extends StatelessWidget {
   const CustomCard2({
     Key? key,
     required this.image,
     required this.turfName,
-    required this.starRating,
+    required this.starRating, 
+    required this.data,
   }) : super(key: key);
   final String image;
   final String turfName;
   final String starRating;
+  final Datum data;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +40,7 @@ class CustomCard2 extends StatelessWidget {
           children: [
             Row(
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite_outline,
-                    color: Colors.black,
-                  ),
-                ),
+                FavTurfIconButton(data: data),
                 Row(
                   children: [
                     const Icon(
