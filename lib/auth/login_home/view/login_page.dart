@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_tickets/login/create_account/view/create_new_account.dart';
-import 'package:movie_tickets/login/login_home/controller/login_page_controller.dart';
-import 'package:movie_tickets/login/widgets/text_form_field.dart';
+import 'package:movie_tickets/auth/create_account/view/create_new_account.dart';
+import 'package:movie_tickets/auth/login_home/controller/login_page_controller.dart';
+import 'package:movie_tickets/auth/widgets/text_form_field.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);

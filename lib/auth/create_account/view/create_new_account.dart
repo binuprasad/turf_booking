@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_tickets/login/create_account/controller/create_new_account_controller.dart';
-import 'package:movie_tickets/login/widgets/text_form_field.dart';
+import 'package:movie_tickets/auth/create_account/controller/create_new_account_controller.dart';
+import 'package:movie_tickets/auth/widgets/text_form_field.dart';
 
 class CreateNewAccount extends StatelessWidget {
   CreateNewAccount({Key? key}) : super(key: key);

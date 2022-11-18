@@ -66,7 +66,7 @@ class TurfViewScreen extends StatelessWidget {
                     childPadding: 0,
                     borderRadius: 20,
                     child: Container(
-                      height: MediaQuery.of(context).size.height / 1.8,
+                      height: MediaQuery.of(context).size.height / 1.4,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           gradient:
@@ -74,12 +74,16 @@ class TurfViewScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           ht10,
-                          Text(
-                            data.turfName!,
-                            style: GoogleFonts.notoSerif(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: green),
+                          SizedBox(
+                            child: FittedBox(
+                              child: Text(
+                                data.turfName!,
+                                style: GoogleFonts.notoSerif(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    color: green),
+                              ),
+                            ),
                           ),
                           ht10,
                           RichText(
@@ -185,7 +189,6 @@ class TurfViewScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                ht30
               ],
             ),
           ),
@@ -193,12 +196,14 @@ class TurfViewScreen extends StatelessWidget {
       ),
       bottomNavigationBar: SizedBox(
         height: MediaQuery.of(context).size.height / 15,
-        width: MediaQuery.of(context).size.width / 1.3,
+        width: MediaQuery.of(context).size.width,
         child: ElevatedButton(
           onPressed: () async {
             await bookNowController.bookNowOntap(data);
           },
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+          ),
           child: const Text(
             'Book Now',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),

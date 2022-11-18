@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_tickets/login/verification/view/verification_screen.dart';
+import 'package:movie_tickets/auth/verification/view/verification_screen.dart';
 import 'package:movie_tickets/service/login_service.dart';
 
 class CreateNewAccountcontroller extends GetxController {

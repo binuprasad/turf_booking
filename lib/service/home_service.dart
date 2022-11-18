@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_tickets/constant/list_url.dart';
-import 'package:movie_tickets/login/error_handling/error_handling.dart';
+import 'package:movie_tickets/auth/error_handling/error_handling.dart';
 import 'package:movie_tickets/model/home_model.dart';
 
 class HomeServices {

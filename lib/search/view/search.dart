@@ -140,16 +140,21 @@ class SearchScreen extends GetView<SearchController> {
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 0,
-                                                        vertical: 30),
-                                                child: Text(
-                                                  datas.turfName.toString(),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                      fontSize: 19,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: green),
+                                                        vertical: 27),
+                                                child: SizedBox(
+                                                  width: 150,
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      datas.turfName.toString(),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                          fontSize: 19,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: green),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                               Row(

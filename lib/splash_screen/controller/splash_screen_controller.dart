@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:movie_tickets/bottom_navigationbar/view/bottom_navigation.dart';
-import 'package:movie_tickets/login/login_home/view/login_page.dart';
+import 'package:movie_tickets/auth/login_home/view/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenController extends GetxController {

@@ -23,9 +23,7 @@ class ErrorHandling {
       //   showDialogue('Some other Error');
       // }
 
-
-      
-      // showDialogue(e.response!.data['message'].toString());
+      showDialogue(e.response!.data['message'].toString());
     } else if (e is SocketException) {
       showDialogue(
         'No Internet Connection',
@@ -38,7 +36,7 @@ class ErrorHandling {
       AlertDialog(
         backgroundColor: const Color.fromARGB(255, 238, 233, 235),
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Text(
             'Alert',
             style: GoogleFonts.pressStart2p(fontSize: 17),

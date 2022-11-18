@@ -1,17 +1,21 @@
 import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_tickets/book_now/view/book_now.dart';
+import 'package:movie_tickets/home/view/home_screen.dart';
 import 'package:movie_tickets/model/booking_model.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:movie_tickets/service/booking_service.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../../model/add_booking_model.dart';
 
 class BookNowController extends GetxController {
   DateTime selectedValue = DateTime.now();
   RxInt totalPrice = 0.obs;
+  String id = '';
   var finalTime = 0;
-  late String parseddate;
+  // late String parseddate;
   String selectedDate = '';
   List<String> morning = [];
   List<String> afterNoon = [];
@@ -20,7 +24,7 @@ class BookNowController extends GetxController {
   List<dynamic> convertedList = [];
   List<String> newSlotList = [];
   List<int> sendToBackendlist = [];
-
+  late Razorpay _razorpay;
   List alreadyBookingslots = [];
   Map<String, List<int>> bookingslotsMap = {};
 //-----------------------------------------------------------convert 24 hrs to 12 hrs
@@ -43,7 +47,7 @@ class BookNowController extends GetxController {
         convertedList.add(allTime[i]);
       }
     }
-    log('1st $convertedList');
+    // log('1st $convertedList');
   }
 
 //------------------------------------------------------------------------split time
@@ -121,7 +125,7 @@ class BookNowController extends GetxController {
   }) {
     int parsedTime = int.parse(item.trim().split(':').first);
     var parseddate = DateFormat.d().format(selectedValue);
-    log('$parseddate ---------parsedate');
+    // log('$parseddate ---------parsedate');
     finalTime = 0;
     if (heading != 'morning') {
       finalTime = parsedTime + 12;
@@ -161,18 +165,18 @@ class BookNowController extends GetxController {
 
 //-------------------------------------------------------------------------------------get booked turf function
   Future<void> getBookings(String id) async {
-    log(" turf id $id");
+    // log(" turf id $id");
     final BookResponse? response = await BookingService().getBooking(id: id);
-   
+
     if (response != null) {
-       log('respnse in get booking ${response.data}');
+      //  log('respnse in get booking ${response.data}');
       for (var element in response.data) {
         bookingslotsMap[element.bookingDate] = element.timeSlot;
-        log('$bookingslotsMap  -----------booking map');
+        // log('$bookingslotsMap  -----------booking map');
       }
     } else {
       log('response . data is null');
-      // bookingslotsMap['11/12/2022'] = [15, 22, 5, 10];
+      bookingslotsMap['11/18/2022'] = [15, 22, 5, 10];
     }
   }
 
@@ -182,21 +186,65 @@ class BookNowController extends GetxController {
     alreadyBookingslots.clear();
     if (bookingslotsMap.containsKey(selectedDate)) {
       alreadyBookingslots.addAll(bookingslotsMap[selectedDate]!);
-      log('bookig slots sfter adding $alreadyBookingslots');
+      // log('bookig slots sfter adding $alreadyBookingslots');
     }
-    log('booking slot map $bookingslotsMap');
-    log('selected Date $selectedDate');
-    log(alreadyBookingslots.toString());
   }
 
 //-------------------------------------------------------------------book turf function
-  Future<void> addBooking(String id) async {
+  Future<void> addBookings(String id) async {
     AddBookingRequest model = AddBookingRequest(
-        bookingDate: parseddate, turfId: id, timeSlot: sendToBackendlist);
-    final bool? response = await BookingService().addBooking(model: model);
-    if (response != null) {
-    } else {
-      log('no data is found');
-    }
+        bookingDate: selectedDate, turfId: id, timeSlot: sendToBackendlist);
+    log('$selectedDate -----in to the booknow controller page ----addbooking selecteddate');
+    log('$sendToBackendlist ------in the book now controller page ---------senttobackendlist ');
+    BookingService().addBooking(model: model);
+    log('after addbooking service');
+  }
+
+//---------------------------oninit
+  @override
+  void onInit() {
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.onInit();
+  }
+
+//--------------------------on dispose
+
+  @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
+  }
+
+//------------------------------------------razorpay functions
+  Future<void> _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    Get.offAll(() => HomeScreen());
+    addBookings(id);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Get.snackbar('Razorpay', response.message.toString());
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Get.snackbar('Razorpay', response.walletName.toString());
+  }
+
+//------------------------------------------------------open razorpay
+  void openRazorpay() {
+    var options = {
+      'key': 'rzp_test_HGhudhNLE4XMyi',
+      'amount': totalPrice * 100, //in the smallest currency sub-unit.
+      'name': 'Acme Corp.',
+      // 'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
+      'description': 'Fine T-Shirt',
+      'timeout': 60, // in seconds
+      'prefill': {'contact': '9123456789', 'email': 'gaurav.kumar@example.com'}
+    };
+
+    _razorpay.open(options);
+    // Get.back();
   }
 }

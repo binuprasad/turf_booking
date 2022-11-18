@@ -71,7 +71,7 @@ class BookNow extends StatelessWidget {
                             Expanded(
                               child: DatePicker(
                                 DateTime.now(),
-                                daysCount: 31,
+                                daysCount: 28,
                                 initialSelectedDate: DateTime.now(),
                                 selectionColor: black,
                                 selectedTextColor: white,
@@ -87,7 +87,7 @@ class BookNow extends StatelessWidget {
                                   initialDate: booknowController.selectedValue,
                                   firstDate: DateTime.now(),
                                   lastDate: DateTime.now().add(
-                                    const Duration(days: 100),
+                                    const Duration(days: 30),
                                   ),
                                 );
                               },
@@ -230,18 +230,16 @@ class BookNow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Obx(
-              () => GestureDetector(
-                onTap: () {},
-                child: BottomNavigationContainer(
-                  text: 'TotalPrice:${booknowController.totalPrice}',
-                  backgrounColor: green,
-                  textColor: white,
-                ),
+              () => BottomNavigationContainer(
+                text: 'TotalPrice: ${booknowController.totalPrice}',
+                backgrounColor: green,
+                textColor: white,
               ),
             ),
             GestureDetector(
               onTap: () {
-                booknowController.addBooking(data.id!);
+                booknowController.id = data.id!;
+                booknowController.openRazorpay();
               },
               child: const BottomNavigationContainer(
                 text: 'Book',

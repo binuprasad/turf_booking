@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/route_manager.dart';
 import 'package:movie_tickets/constant/list_url.dart';
-import 'package:movie_tickets/login/error_handling/error_handling.dart';
+import 'package:movie_tickets/auth/error_handling/error_handling.dart';
 import 'package:movie_tickets/model/create_account_model.dart';
 import 'package:movie_tickets/model/login_account_model.dart';
 import '../home/view/home_screen.dart';

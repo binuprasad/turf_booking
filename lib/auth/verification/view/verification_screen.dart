@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_tickets/login/create_account/controller/create_new_account_controller.dart';
-import 'package:movie_tickets/login/verification/controller/otp_verification_controller.dart';
+import 'package:movie_tickets/auth/create_account/controller/create_new_account_controller.dart';
+import 'package:movie_tickets/auth/verification/controller/otp_verification_controller.dart';
 import 'package:movie_tickets/service/login_service.dart';
 import 'package:pinput/pinput.dart';
 
@@ -30,12 +30,16 @@ class OTPverification extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Enter the OTP if you want\nto login.',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.andadaPro(
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 30),
+                SizedBox(
+                  child: FittedBox(
+                    child: Text(
+                      'Enter the OTP if you want\nto login.',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.andadaPro(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 30),
+                      ),
+                    ),
                   ),
                 ),
               ],

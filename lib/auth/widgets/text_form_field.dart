@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_tickets/login/login_home/controller/login_page_controller.dart';
+import 'package:movie_tickets/auth/login_home/controller/login_page_controller.dart';
 
 class TextformField extends GetView<LoginPageController> {
   TextformField({
