@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:movie_tickets/constant/list_url.dart';
 import 'package:movie_tickets/model/home_model.dart';
-
 import '../auth/error_handling/error_handling.dart';
 
 class FavServices {

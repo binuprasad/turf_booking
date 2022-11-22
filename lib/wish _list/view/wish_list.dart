@@ -28,8 +28,7 @@ class WishList extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   children: List.generate(
-                     favouriteController
-                                            .favaTurf.length,
+                    favouriteController.favaTurf.length,
                     (i) => GridAnimatorWidget(
                       child: Padding(
                         padding: const EdgeInsets.all(4),
@@ -46,8 +45,7 @@ class WishList extends StatelessWidget {
                                       fit: BoxFit.fill)),
                             ),
                             FavTurfIconButton(
-                                data:  favouriteController
-                                            .favaTurf[i]),
+                                data: favouriteController.favaTurf[i]),
                             // IconButton(
                             //   onPressed: () {},
                             //   icon:  const CircleAvatar(

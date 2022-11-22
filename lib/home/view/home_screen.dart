@@ -10,17 +10,16 @@ import 'package:movie_tickets/home/widgets/cuatom_card2.dart';
 import 'package:movie_tickets/home/widgets/home_custom_card.dart';
 import 'package:movie_tickets/home/widgets/text_widget.dart';
 import 'package:movie_tickets/location_controller/location_controller.dart';
-import 'package:movie_tickets/auth/login_home/view/login_page.dart';
 import 'package:movie_tickets/search/view/search.dart';
 import 'package:movie_tickets/turf_view_screen/view/turf_view.dart';
 import 'package:movie_tickets/wish%20_list/widgets/favourite_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final homecontroller = Get.put(HomeController());
   final locationController = Get.put(LocationController());
   final bookNowController = Get.put(BookNowController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,27 +39,37 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                          onTap: () async {
-                            SharedPreferences pref =
-                                await SharedPreferences.getInstance();
-                            pref.remove('token');
-                            Get.offAll(() => LoginPage());
-                          },
-                          child: Text(
-                            'Arco',
-                            style: GoogleFonts.akronim(
-                                fontSize: 70, color: Colors.white),
-                          ),
+                        Text(
+                          'Arco',
+                          style:
+                              GoogleFonts.akronim(fontSize: 70, color: black),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            Get.to(() => SearchScreen());
-                          },
-                          icon: const Icon(
-                            Icons.search,
-                            size: 30,
-                            color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  blurRadius: 8,
+                                  spreadRadius: 4,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            child: IconButton(
+                              onPressed: () {
+                                Get.to(() => SearchScreen());
+                              },
+                              icon: const Icon(
+                                Icons.search,
+                                size: 30,
+                                color: green,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -69,18 +78,19 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         children: [
-                          const Icon(Icons.location_on, color: Colors.white),
+                          const Icon(Icons.location_on, color: blueGrey),
                           Obx(
                             () => Text(
                               '${locationController.currentAddress}',
-                              style: const TextStyle(color: Colors.white),
+                              style: const TextStyle(color: blueGrey),
                             ),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(
-                      height: 200,
+                      height: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       child: PageView(
                         pageSnapping: false,
                         children: const <Widget>[
@@ -99,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const TitleText(text: 'Nearby Turf'),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 3.8,
+                      height: MediaQuery.of(context).size.height *0.5/2,
                       width: MediaQuery.of(context).size.width,
                       child: GetBuilder<HomeController>(
                         builder: (controller) => ListView.builder(
@@ -120,7 +130,8 @@ class HomeScreen extends StatelessWidget {
                                   image: data.turfLogo.toString(),
                                   turfName: data.turfName.toString(),
                                   starRating:
-                                      data.turfInfo!.turfRating!.toString(), data: data,
+                                      data.turfInfo!.turfRating!.toString(),
+                                  data: data,
                                 ),
                               );
                             }
@@ -145,11 +156,11 @@ class HomeScreen extends StatelessWidget {
                                 bookNowController.convert24ToNormalTime(datas);
                               },
                               child: GlassContainer(
-                                elevation: 3.0,
+                                elevation: 20,
                                 gradient: LinearGradient(
                                   colors: [
-                                    Colors.white.withOpacity(0.40),
-                                    Colors.white.withOpacity(0.10)
+                                    Colors.lightBlueAccent.withOpacity(0.04),
+                                    Colors.white.withOpacity(0.40)
                                   ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
@@ -158,15 +169,15 @@ class HomeScreen extends StatelessWidget {
                                   colors: [
                                     Colors.white.withOpacity(0.60),
                                     Colors.white.withOpacity(0.10),
-                                    Colors.lightBlueAccent.withOpacity(0.05),
-                                    Colors.lightBlueAccent.withOpacity(0.6)
+                                    Colors.white.withOpacity(0.5),
+                                    Colors.white.withOpacity(0.6)
                                   ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
                                 blur: 15.0,
                                 borderWidth: 1,
-                                height: MediaQuery.of(context).size.height / 4,
+                                height: MediaQuery.of(context).size.height*0.2,
                                 width: MediaQuery.of(context).size.height,
                                 child: Row(
                                   children: [
@@ -192,24 +203,20 @@ class HomeScreen extends StatelessWidget {
                                       width: MediaQuery.of(context).size.width /
                                           15,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0, top: 10),
+                                    Expanded(
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             width: 150,
-                                            child: FittedBox(
-                                              child: Text(
-                                                datas.turfName.toString(),
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                    fontSize: 19,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: green),
-                                              ),
+                                            child: Text( 
+                                              datas.turfName.toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: green),
                                             ),
                                           ),
                                           ht10,
@@ -249,8 +256,7 @@ class HomeScreen extends StatelessWidget {
                                             ],
                                           ),
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Row(
                                                 children: [
@@ -261,12 +267,7 @@ class HomeScreen extends StatelessWidget {
                                                       .toString())
                                                 ],
                                               ),
-                                              // SizedBox(
-                                              //   width: MediaQuery.of(context)
-                                              //           .size
-                                              //           .width /
-                                              //       6,
-                                              // ),
+                                              
                                               FavTurfIconButton(data: datas),
                                             ],
                                           )

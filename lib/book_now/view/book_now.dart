@@ -59,7 +59,7 @@ class BookNow extends StatelessWidget {
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30.0),
                       ),
-                      color: appColor),
+                      color: white),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -197,19 +197,19 @@ class BookNow extends StatelessWidget {
                                     );
                                   },
                                   child: ChoiceContainer(
-                                      contains: booknowController.newSlotList
-                                          .contains(
-                                              booknowController.evening[index]),
-                                      time: booknowController.evening[index],
-                                      isAvailable: booknowController
-                                          .isAvailableCheckFunction(
-                                        item: booknowController.evening[index],
-                                        heading: 'evening',
-                                      ),
-                                      isBooked: booknowController
-                                          .alreadyBookingslots
-                                          .contains(
-                                              booknowController.finalTime)),
+                                    contains: booknowController.newSlotList
+                                        .contains(
+                                            booknowController.evening[index]),
+                                    time: booknowController.evening[index],
+                                    isAvailable: booknowController
+                                        .isAvailableCheckFunction(
+                                      item: booknowController.evening[index],
+                                      heading: 'evening',
+                                    ),
+                                    isBooked: booknowController
+                                        .alreadyBookingslots
+                                        .contains(booknowController.finalTime),
+                                  ),
                                 ),
                               ),
                             );

@@ -1,19 +1,15 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:movie_tickets/model/home_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../service/wish_list_services.dart';
 
-class WishListController extends GetxController{
- List<Datum>favTurf = [];
- final homescreencontroller = Get.put(HomeController());
- RxBool isFavSearched = false.obs;
-  List<dynamic> foundTurfFav = [];
-  List<Datum> favaTurf = [];
+class WishListController extends GetxController {
+  List<Datum> favTurf = [];
+  final homescreencontroller = Get.put(HomeController());
 
+  List<Datum> favaTurf = [];
 
   Future<void> addFavToDb(Datum data) async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
@@ -86,11 +82,11 @@ class WishListController extends GetxController{
     final id = pref.getString('user_id');
 
     final favresponse = await FavServices().getFav(id!);
-    // log(favresponse!.data.toString());
+
     favaTurf.clear();
     if (favresponse != null) {
       favaTurf.addAll(favresponse.data!);
-
+      log(favresponse.data.toString());
       log("fav turf list:------- $favaTurf");
     } else {
       log('favresponse is null');
@@ -111,10 +107,7 @@ class WishListController extends GetxController{
         : await addFavToDb(data);
     log("isfav.value ${isFav(data).value}");
     await getFav();
-  
+
     // log('inside checkandaddtodb after calling getfav favturflist length is :${favaTurf.length}');
   }
-
- 
-
 }

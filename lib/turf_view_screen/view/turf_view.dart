@@ -19,7 +19,7 @@ class TurfViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(color: Colors.greenAccent),
+        decoration: const BoxDecoration(color: white),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -33,9 +33,17 @@ class TurfViewScreen extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 3.5,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
+                          boxShadow:  [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 8,
+                                spreadRadius: 4,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
                           border: Border.all(color: white),
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(20.0)),
+                              const BorderRadius.all(Radius.circular(7.0)),
                           image: DecorationImage(
                               image:
                                   NetworkImage(data.turfImages!.turfImages1!),
@@ -66,11 +74,20 @@ class TurfViewScreen extends StatelessWidget {
                     childPadding: 0,
                     borderRadius: 20,
                     child: Container(
-                      height: MediaQuery.of(context).size.height / 1.4,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient:
-                              const LinearGradient(colors: [appColor, white])),
+                        boxShadow:  [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 8,
+                                spreadRadius: 4,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: const LinearGradient(
+                          colors: [appColor, white],
+                        ),
+                      ),
                       child: Column(
                         children: [
                           ht10,

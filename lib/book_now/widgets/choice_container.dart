@@ -8,11 +8,13 @@ class ChoiceContainer extends StatelessWidget {
     required this.contains,
     required this.isAvailable,
     required this.isBooked,
+   
   }) : super(key: key);
   final String time;
   final bool contains;
   final bool isAvailable;
   final bool isBooked;
+ 
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -23,6 +23,7 @@ class CustomCard2 extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 4.0,
       width: MediaQuery.of(context).size.width / 2,
       childPadding: 0,
+      elevation: 30,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(

@@ -31,6 +31,7 @@ environment:
 dependencies:
   animated_splash_screen: ^1.3.0
   auto_size_text: ^3.0.0
+  babstrap_settings_screen: ^0.1.3
   cupertino_icons: ^1.0.2
   date_picker_timeline: ^1.2.3
   dio: ^4.0.6
@@ -47,12 +48,14 @@ dependencies:
   google_fonts: ^3.0.1
   intl: ^0.17.0
   lottie: ^2.0.0
+  morphing_text: ^1.0.1
   page_transition: ^2.0.9
   pinput: ^2.2.16
   razorpay_flutter: ^1.3.4
   shaky_animated_listview: ^0.0.5
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
+  step_progress_indicator: ^1.0.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0

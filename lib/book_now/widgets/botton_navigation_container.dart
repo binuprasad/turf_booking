@@ -15,7 +15,17 @@ class BottomNavigationContainer extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width / 2,
       height: MediaQuery.of(context).size.height,
-      color: backgrounColor,
+      decoration: BoxDecoration(boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: const Offset(0, 3), 
+        
+      ),
+    ],
+        color: backgrounColor,),
+  
       child:  Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(

@@ -15,11 +15,11 @@ class SearchScreen extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.greenAccent, Colors.white],
+          colors: [Colors.lightBlueAccent.withOpacity(0.5), Colors.white],
         ),
       ),
       child: SafeArea(
@@ -98,7 +98,12 @@ class SearchScreen extends GetView<SearchController> {
                                     onTap: () => Get.to(
                                         () => TurfViewScreen(data: datas)),
                                     child: Container(
-                                      color: Colors.greenAccent,
+                                      decoration: const BoxDecoration(
+                                          gradient: LinearGradient(colors: [Colors.lightBlue,white]),
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(40),
+                                              bottomRight:
+                                                  Radius.circular(40))),
                                       height:
                                           MediaQuery.of(context).size.height /
                                               5.0,
@@ -147,12 +152,13 @@ class SearchScreen extends GetView<SearchController> {
                                                   child: FittedBox(
                                                     child: Text(
                                                       datas.turfName.toString(),
-                                                     
-                                                      style: GoogleFonts.ptSerif(
-                                                          fontSize: 19,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: green),
+                                                      style:
+                                                          GoogleFonts.ptSerif(
+                                                              fontSize: 19,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color: green),
                                                     ),
                                                   ),
                                                 ),
