@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:movie_tickets/model/home_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../service/wish_list_services.dart';
 
 class WishListController extends GetxController {
@@ -11,11 +12,11 @@ class WishListController extends GetxController {
   List<Datum> favaTurf = [];
 
   Future<void> addFavToDb(Datum data) async {
-    // final SharedPreferences pref = await SharedPreferences.getInstance();
-    // final id = pref.getString('user_id');
-    // log('$id -----------id from addFavToDb function');
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    final id = pref.getString('user_id');
+    log('$id -----------id from addFavToDb function');
     final HomeResponse favResponse = HomeResponse(
-      userId: data.id,
+      userId:id,
       data: [
         Datum(
           id: data.id,
@@ -78,10 +79,13 @@ class WishListController extends GetxController {
 //-------------------------------------------------------------------------Get favourite list
 
   Future<void> getFav(Datum data) async {
-    final favresponse = await FavServices().getFav(data.id!);
-    log('${data.id}  -------id in getfav function');
-    favaTurf.clear();
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    final id = pref.getString('user_id');
+    final favresponse = await FavServices().getFav(id!);
+    log('$id  -------id in getfav function');
+ 
     if (favresponse != null) {
+         favaTurf.clear();
       favaTurf.addAll(favresponse.data!);
       log(favresponse.data.toString());
       log("fav turf list:------- $favaTurf");

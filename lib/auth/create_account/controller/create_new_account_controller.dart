@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_tickets/auth/verification/view/verification_screen.dart';
 import 'package:movie_tickets/service/login_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateNewAccountcontroller extends GetxController {
   final emailController = TextEditingController();
@@ -28,6 +29,12 @@ class CreateNewAccountcontroller extends GetxController {
         
           log('no error on create account');
         id = response.id!;
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(
+      'user_id',
+      response.id!
+    );
+
         Get.to(() => OTPverification());
         
       }
