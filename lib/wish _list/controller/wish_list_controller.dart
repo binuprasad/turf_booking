@@ -2,20 +2,20 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:movie_tickets/home/controller/home_controller.dart';
 import 'package:movie_tickets/model/home_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../service/wish_list_services.dart';
 
 class WishListController extends GetxController {
-  List<Datum> favTurf = [];
+  // List<Datum> favTurf = [];
   final homescreencontroller = Get.put(HomeController());
 
   List<Datum> favaTurf = [];
 
   Future<void> addFavToDb(Datum data) async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    final id = pref.getString('user_id');
+    // final SharedPreferences pref = await SharedPreferences.getInstance();
+    // final id = pref.getString('user_id');
+    // log('$id -----------id from addFavToDb function');
     final HomeResponse favResponse = HomeResponse(
-      userId: id,
+      userId: data.id,
       data: [
         Datum(
           id: data.id,
@@ -69,20 +69,17 @@ class WishListController extends GetxController {
     await FavServices().addToWishList(favResponse);
   }
 
-//------------------------------------------------------------------------------------- remove from wishlist function
+//---------------------------------------------------------------------- remove from wishlist function
 
   Future<void> removeFromFav(String turfId) async {
     await FavServices().deleteWishlist(turfId);
   }
 
-//-------------------------------------------------------------------------------------Get favourite list
+//-------------------------------------------------------------------------Get favourite list
 
-  Future<void> getFav() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    final id = pref.getString('user_id');
-
-    final favresponse = await FavServices().getFav(id!);
-
+  Future<void> getFav(Datum data) async {
+    final favresponse = await FavServices().getFav(data.id!);
+    log('${data.id}  -------id in getfav function');
     favaTurf.clear();
     if (favresponse != null) {
       favaTurf.addAll(favresponse.data!);
@@ -106,8 +103,16 @@ class WishListController extends GetxController {
         ? await removeFromFav(data.id!)
         : await addFavToDb(data);
     log("isfav.value ${isFav(data).value}");
-    await getFav();
+    await getFav(data);
+    log('${favaTurf[3]}  ----------favaturf list');
 
-    // log('inside checkandaddtodb after calling getfav favturflist length is :${favaTurf.length}');
+    log('inside checkandaddtodb after calling getfav favturflist length is :${favaTurf.length}');
   }
+
+  // @override
+  // void onInit() {
+  //   getFav();
+  //   log(getFav().toString());
+  //   super.onInit();
+  // }
 }

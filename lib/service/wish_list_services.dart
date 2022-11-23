@@ -14,12 +14,12 @@ class FavServices {
           await dio.post(Endpoints.addWishList, data: favResponse.toJson());
 
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+        log('${response.data} -------------addtowishlist service');
         return HomeResponse.fromJson(response.data);
       }
     } catch (e) {
       log("add to wishlist catch${e.toString()}");
-        ErrorHandling().errorHandler(e);
-
+      ErrorHandling().errorHandler(e);
     }
     return null;
   }
@@ -34,7 +34,7 @@ class FavServices {
         return HomeResponse.fromJson(response.data);
       }
     } catch (e) {
-     ErrorHandling().errorHandler(e);
+      ErrorHandling().errorHandler(e);
     }
     return null;
   }
@@ -43,13 +43,12 @@ class FavServices {
   Future<HomeResponse?> deleteWishlist(String id) async {
     try {
       final Response response = await dio.delete(Endpoints.removeWishList + id);
-
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+        log('${response.data} ----------response of deletewishlist');
         return HomeResponse.fromJson(response.data);
       }
     } catch (e) {
-           ErrorHandling().errorHandler(e);
-
+      ErrorHandling().errorHandler(e);
     }
     return null;
   }

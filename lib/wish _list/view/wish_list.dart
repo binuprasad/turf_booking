@@ -29,23 +29,23 @@ class WishList extends StatelessWidget {
                   crossAxisCount: 2,
                   children: List.generate(
                     favouriteController.favaTurf.length,
-                    (i) => GridAnimatorWidget(
+                    (index) => GridAnimatorWidget(
                       child: Padding(
                         padding: const EdgeInsets.all(4),
                         child: Stack(
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                        favouriteController
-                                            .favaTurf[i].turfLogo!,
-                                      ),
-                                      fit: BoxFit.fill)),
+                                borderRadius: BorderRadius.circular(20.0),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                      favouriteController.favaTurf[index].turfLogo!,
+                                    ),
+                                    fit: BoxFit.fill),
+                              ),
                             ),
                             FavTurfIconButton(
-                                data: favouriteController.favaTurf[i]),
+                                data: favouriteController.favaTurf[index]),
                             // IconButton(
                             //   onPressed: () {},
                             //   icon:  const CircleAvatar(
