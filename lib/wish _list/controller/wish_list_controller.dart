@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../service/wish_list_services.dart';
 
 class WishListController extends GetxController {
-  // List<Datum> favTurf = [];
   final homescreencontroller = Get.put(HomeController());
 
   List<Datum> favaTurf = [];
@@ -16,7 +15,7 @@ class WishListController extends GetxController {
     final id = pref.getString('user_id');
     log('$id -----------id from addFavToDb function');
     final HomeResponse favResponse = HomeResponse(
-      userId:id,
+      userId: id,
       data: [
         Datum(
           id: data.id,
@@ -83,9 +82,9 @@ class WishListController extends GetxController {
     final id = pref.getString('user_id');
     final favresponse = await FavServices().getFav(id!);
     log('$id  -------id in getfav function');
- 
+
     if (favresponse != null) {
-         favaTurf.clear();
+      favaTurf.clear();
       favaTurf.addAll(favresponse.data!);
       log(favresponse.data.toString());
       log("fav turf list:------- $favaTurf");
@@ -108,15 +107,7 @@ class WishListController extends GetxController {
         : await addFavToDb(data);
     log("isfav.value ${isFav(data).value}");
     await getFav(data);
-    // log('${favaTurf[3]}  ----------favaturf list');
 
     log('inside checkandaddtodb after calling getfav favturflist length is :${favaTurf.length}');
   }
-
-  // @override
-  // void onInit() {
-  //   getFav();
-  //   log(getFav().toString());
-  //   super.onInit();
-  // }
 }

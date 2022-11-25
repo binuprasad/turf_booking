@@ -8,7 +8,7 @@ class HomeController extends GetxController {
   final locationController = Get.put(LocationController());
   var isLoading = true.obs;
   @override
-  void onInit() async {
+  Future<void> onInit() async {
     await nearestTurf();
     await allTheTurfs();
     super.onInit();

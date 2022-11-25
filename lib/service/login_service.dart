@@ -50,7 +50,7 @@ class ApiServices {
     }
     return null;
   }
-
+ 
 //-----------------sign in --------------------//
 
   Future<EmailLoginRespones?> loginpageService(

@@ -23,7 +23,7 @@ class ErrorHandling {
       //   showDialogue('Some other Error');
       // }
 
-      showDialogue(e.response!.data['message'].toString());
+      // showDialogue(e.response!.data['message'].toString());
     } else if (e is SocketException) {
       showDialogue(
         'No Internet Connection',

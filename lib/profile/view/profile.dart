@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_tickets/constant/color.dart';
+import 'package:movie_tickets/profile/widgets/about_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../auth/login_home/view/login_page.dart';
 
@@ -70,7 +71,9 @@ class MyAccount extends StatelessWidget {
             SettingsGroup(
               items: [
                 SettingsItem(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(()=>AboutScreen());
+                  },
                   icons: Icons.info_rounded,
                   iconStyle: IconStyle(
                     backgroundColor: Colors.purple,

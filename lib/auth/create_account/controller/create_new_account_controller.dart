@@ -32,10 +32,10 @@ class CreateNewAccountcontroller extends GetxController {
      SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(
       'user_id',
-      response.id!
+     id
     );
 
-        Get.to(() => OTPverification());
+      await  Get.to(() => OTPverification());
         
       }
     }

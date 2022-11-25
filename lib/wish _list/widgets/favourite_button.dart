@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_tickets/constant/color.dart';
@@ -16,16 +15,18 @@ class FavTurfIconButton extends GetView<WishListController> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: ()  {
-        log('entering into the favbutton ontap');
+    return Obx(() => IconButton(
+          onPressed: () {
+            log('entering into the favbutton ontap');
 
-         controller.checkFavAndAddToDb(data);
-      },
-      icon: Icon(
-        controller.isFav(data).value? Icons.bookmark : Icons.bookmark_outline,
-      ),
-      color: controller.isFav(data).value ? black : black,
-    );
+            controller.checkFavAndAddToDb(data);
+          },
+          icon: Icon(
+            controller.isFav(data).value 
+                ? Icons.bookmark
+                : Icons.bookmark_outline,
+          ),
+          color: controller.isFav(data).value ? black : black,
+        ));
   }
 }

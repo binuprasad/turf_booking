@@ -35,6 +35,7 @@ class LoginPageController extends GetxController {
       'token',
       response.token!
     );
+    // prefs.setString('user_id', response.id)
     prefs.setString('refreshtoken', response.refreshToken.toString());
     var token = prefs.getString('token');
     log(token.toString());

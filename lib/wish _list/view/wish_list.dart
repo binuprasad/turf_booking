@@ -25,8 +25,12 @@ class WishList extends StatelessWidget {
           child: Column(
             children: [
               ht20,
-             const TitleText(text: 'WishList'),
-             ht20,
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: TitleText(text: 'WishList'),
+              ),
+              ht30,
+              ht30,
               favouriteController.favaTurf.isEmpty
                   ? Center(
                       child: Lottie.asset("assets/image/114164-favourite.json",
