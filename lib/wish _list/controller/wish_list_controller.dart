@@ -108,7 +108,7 @@ class WishListController extends GetxController {
         : await addFavToDb(data);
     log("isfav.value ${isFav(data).value}");
     await getFav(data);
-    log('${favaTurf[3]}  ----------favaturf list');
+    // log('${favaTurf[3]}  ----------favaturf list');
 
     log('inside checkandaddtodb after calling getfav favturflist length is :${favaTurf.length}');
   }
