@@ -70,14 +70,14 @@ class AboutScreen extends GetView<ProfileController> {
                   children: const [
                     Center(
                       child: Text(
-                        'Welcome to MusicMusca and enjoy listening offline music with better experience. If you have any suggestions you can inform me by clicking the feedback section in the settings,We will try to improve our app more better,thank you.',
+                        'Welcome to Arco and enjoy your game with better turf. you can book your nearest turf or favourite turf ,enjoy your game and share your experience,thank you.',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                     Center(
                       child: Text(
-                        "I am Binuprasad.Expertised in UI/UX Designing and Flutter development based on kerala,if you have any queries related to  musicapp or about me by taping 'Contact' on the settings. Once of all thank you for supporting me.",
+                        "I am Binuprasad.Expertised in UI/UX Designing and Flutter development based on kerala,iam developed this app and i think you got better experience from here. Once of all thank you for supporting me.",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),

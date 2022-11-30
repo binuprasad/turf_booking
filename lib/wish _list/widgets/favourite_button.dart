@@ -22,7 +22,7 @@ class FavTurfIconButton extends GetView<WishListController> {
             controller.checkFavAndAddToDb(data);
           },
           icon: Icon(
-            controller.isFav(data).value 
+            controller.isFav(data).value == true
                 ? Icons.bookmark
                 : Icons.bookmark_outline,
           ),

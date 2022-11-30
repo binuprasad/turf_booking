@@ -7,8 +7,8 @@ class LocationController extends GetxController {
   dynamic currentPosition = Geolocator.getCurrentPosition().obs;
   RxString currentAdrressToFetchHome = 'unknown location'.obs;
   @override
-  void onInit()  async {
- await     getCurrentPosition();
+  void onInit() async {
+    await getCurrentPosition();
     super.onInit();
   }
 
@@ -48,9 +48,11 @@ class LocationController extends GetxController {
         .then((Position position) {
       currentPosition = position;
       getAddressFromLatLng(position);
-    }).catchError((e) {
-      // log(e.toString());
-    });
+    }).catchError(
+      (e) {
+        // log(e.toString());
+      },
+    );
   }
 
   Future<void> getAddressFromLatLng(Position position) async {
@@ -62,9 +64,11 @@ class LocationController extends GetxController {
 
       currentAddress.value =
           '${place.subLocality},${place.subAdministrativeArea}';
-          currentAdrressToFetchHome.value = place.subAdministrativeArea!;
-    }).catchError((e) {
-      // log(e.toString());
-    });
+      currentAdrressToFetchHome.value = place.subAdministrativeArea!;
+    }).catchError(
+      (e) {
+        // log(e.toString());
+      },
+    );
   }
 }
